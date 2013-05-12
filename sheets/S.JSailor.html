@@ -1,0 +1,106 @@
+<h3><span class="keyword">JSailor new</span> S.JSailor(<span class="keyword">String</span> expr)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie une nouvelle instance JSailor basée sur les éléments décrits par le sélecteur <pre>expr</pre>. Pour connaître les expressions possibles, suivez le lien <a href="javascript:display('Selecteurs');">sélecteurs</a>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre><span class="keyword">var</span> foos = S(<span class="string">'.foo'</span>);
+<span class="comment">//foos est un objet JSailor basé sur les éléments HTML ayant l'attribut CLASS égal à foo</span></pre></li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor new</span> S.JSailor(<span class="keyword">Element</span> elt)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie une nouvelle instance JSailor basée sur l'élément <pre>elt</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre><span class="keyword">var</span> foo = S(<span class="keyword">document</span>.getElementById(<span class="string">'#foo'</span>));
+<span class="comment">//foo est un objet JSailor basé sur l'élément identifié par l'ID foo</span></pre></li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor new</span> S.JSailor(<span class="keyword">Collection</span> coll)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie une nouvelle instance JSailor basée sur les éléments de la collection HTML <pre>coll</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre><span class="keyword">var</span> spans = S(<span class="keyword">document</span>.getElementByTagName(<span class="string">'span'</span>));
+<span class="comment">//spans est un objet JSailor basé sur les éléments SPAN du document</span></pre></li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor new</span> S.JSailor(<span class="keyword">Array</span> arr)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie une nouvelle instance JSailor basée sur les éléments contenus dans l'array <pre>arr</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre><span class="keyword">var</span> collec = S([elt1, elt2, elt3]);
+<span class="comment">/*elt1-3 sont supposés être des éléments HTML
+collec est alors un objet JSailor basé sur ces 3 éléments*/</span></pre></li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor new</span> S.JSailor(<span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Exécute la fonction <pre>fn</pre> lorsque le DOM est prêt à être manipulé. Plus efficace que l'événement <pre>onload</pre> de <pre class="keyword">window</pre> qui ne se déclenche qu'après le chargement des images.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre>S(<span class="keyword">function</span>(){
+
+    <span class="comment">//votre code ne devant être éxécuté qu'après le chargement de la page</span>
+});</pre></li>
+
+
+    </ul>
+</p>
+
+<hr/>
+
+<p>Remarques:
+    <ul>
+        <li><pre>S()</pre> est identique à <pre><span class="keyword">new</span> S.JSailor()</pre>.</li>
+        <li>Si aucun argument n'est fourni au constructeur ou que sa valeur est "fausse"(<pre>undefined</pre>, <pre>null</pre>, <pre class="keyword">false</pre>, <span class="number">0</span>, <span class="string">''</span> etc…) alors l'instance démarre sans éléments sélectionnés(utile pour rajouter des éléments HTML avec une boucle).</li>
+        <li>La collection d'un objet JSailor ne peut contenir que des éléments HTML et/ou le noeud <pre class="keyword">document</pre>, jamais de noeuds texte.</li>
+    </ul>
+</p>

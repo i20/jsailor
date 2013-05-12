@@ -1,0 +1,46 @@
+<h3><span class="keyword">Object</span> S.Enhancer.anchor</h3>
+
+<p>Description:
+    <ul>
+        <li>Anime la remontée  des ancres internes à la page (cf <a href="tests/S.Enhancer.anchor.html" target="_blank">démo</a>).</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Seules les ancres explicitement internes sont gérées (ie avec <pre><span class="attribut">href</span>=<span class="string">"#xxx"</span></pre>).</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;meta <span class="attribut">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attribut">content</span>=<span class="string">"text/html;charset=UTF-8"</span>/&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">"text/javascript"</span> <span class="attribut">src</span>=<span class="string">"../jsailor-latest.js"</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">"text/javascript"</span>&gt;</span>
+        
+        <span class="comment">//on active l'extension</span>
+        S.Enhancer.anchor.on = <span class="keyword">true</span>;
+        
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        a
+        <span class="php">{
+            position<span class="var">: absolute</span>;
+            top<span class="var">: 2000px</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Cliquez sur l'ancre tout en bas de la page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;a <span class="attribut">href</span>=<span class="string">"#"</span>&gt;</span>Cliquez pour revenir en haut de la page<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

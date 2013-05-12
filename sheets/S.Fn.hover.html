@@ -1,0 +1,54 @@
+<h3><span class="keyword">JSailor</span> S.Fn.hover(<span class="keyword">Function</span> fnover, <span class="keyword">Function</span> fnout)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique <pre>fnover</pre> et <pre>fnout</pre> à tous les éléments de la sélection, respectivement lorsque la souris et sur et en dehors de l'élément.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script">
+<pre>S(<span class="string">'#hover_fn'</span>).hover(<span class="keyword">function</span>(){
+
+    S(<span class="keyword">this</span>).html(<span class="string">'La souris est sur moi!'</span>);
+
+}, <span class="keyword">function</span>(){
+
+    S(<span class="keyword">this</span>).html(<span class="string">'La souris est ailleurs.'</span>);
+});
+<span class="comment">//passez la souris sur le texte ci-dessous pour tester ce code</span></pre><br/>
+<br/>
+<span id="hover_fn"></span>
+<script type="text/javascript">S('#hover_fn').hover(function(){S(this).html('La souris est sur moi!');},function(){S(this).html('La souris est ailleurs.');});</script>
+</li>
+
+    </ul>
+</p>
+<hr/>
+<h3><span class="keyword">JSailor</span> S.Fn.hover(<span class="keyword">Object</span> css)</h3>
+
+<p>Description:
+    <ul>
+        <li>Accomplit la même action que la pseudo-classe <pre class="var">:hover</pre> de css, le style de l'élément sur lequel est la souris étant <pre>css</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script">
+<pre>S(<span class="string">'#hover_css'</span>).hover({
+
+    <span class="string">'color'</span>: <span class="string">'red'</span>,
+    <span class="string">'font-size'</span>: <span class="string">'2em'</span>
+});
+<span class="comment">//passez la souris sur le texte ci-dessous pour tester ce code</span></pre><br/>
+<br/>
+<span id="hover_css">Je suis le texte soumis à hover.</span>
+<script type="text/javascript">S('#hover_css').hover({'color':'red','font-size':'2em'});</script>
+</li>
+
+    </ul>
+</p>

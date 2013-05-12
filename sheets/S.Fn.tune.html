@@ -1,0 +1,64 @@
+<h3><span class="keyword">JSailor</span> S.Fn.tune(<span class="keyword">Object</span> css, <span class="keyword">Number</span> delay, [<span class="keyword">Function</span> callback])</h3>
+
+<p>Description:
+    <ul>
+        <li>Déclenche une animation progressive pour amener chaque élément de la collection au style défini par <pre>css</pre> dans l'intervalle de temps <pre>delay</pre> et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>css</pre> est un objet construit comme pour <pre>S.Fn.css({…})</pre>, il est donc possible d'utiliser les valeurs relatives(ex <span class="string">'+ 12px'</span>) et également les notations javascript et/ou css pour les noms des propriétés(cf <a href="javascript:display('S.Fn.css');">S.Fn.css</a>).</li>
+        <li>La méthode ne peut prendre en compte que des propriétés css qui se prêtent à une variation progressive comme celles ayant des valeurs avec des unités(<span class="string">'height'</span>, <span class="string">'font-size'</span>, <span class="string">'azimut'</span>, etc…), celles qui sont des ratios(<span class="string">'opacity'</span>, etc…), celle qui sont des entiers(<span class="string">'z-index'</span>, <span class="string">'zoom'</span>, etc…) et également les couleurs!(<span class="string">'rgb'</span>, <span class="string">'hsl'</span>, etc…).</li>
+        <li><pre>delay</pre> correspond à une durée en millisecondes.</li>
+        <li><pre>callback</pre> est une fonction optionnelle qui sera appliquée à chaque élément de la collection une fois l'animation complètement terminée sur celui-ci.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script">
+<span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-<span class="current_version"></span>.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'button'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).tune({
+
+                    <span class="string">'font-size'</span>: <span class="string">'3em'</span>,
+                    <span class="string">'color'</span>: <span class="string">'#FFA500'</span>
+
+                }, <span class="number">1000</span>, <span class="keyword">function</span>(){
+
+                    <span class="keyword">alert</span>(<span class="string">'Animation terminée!'</span>);
+                });
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        p
+        <span class="php">{
+            color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;button&gt;</span>Déclenchez l'effet!<span class="tag">&lt;/button&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+</pre>
+
+<a href="tests/S.Fn.tune.html" target="_blank">Tester ce code!</a>
+        </li>
+
+    </ul>
+</p>

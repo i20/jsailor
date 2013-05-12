@@ -1,0 +1,29 @@
+<h3><span class="keyword">Object</span> S.Object.clone(<span class="keyword">Object</span> obj)</h3>
+
+<p>Description:<ul>
+    <li>Renvoie une copie intégrale de <pre>obj</pre>.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li>La copie peut ainsi être modifiée sans altérer l'objet original <pre>obj</pre>.</li>
+</ul></p>
+
+<p>Exemples:<ul>
+
+<li class="script"><pre><span class="keyword">var</span> modele = {
+
+    prop1: <span class="string">'a'</span>,
+    prop2: <span class="string">'b'</span>    
+},
+clone = S.Object.clone(modele),
+pointeur = modele;
+
+clone.prop1 = <span class="string">'z'</span>;
+<span class="comment">//clone.prop1 = 'z', modele.prop1 = pointeur.prop1 = 'a'</span>
+
+pointeur.prop1 = <span class="string">'e'</span>;
+<span class="comment">//clone.prop1 = 'z', modele.prop1 = pointeur.prop1 = 'e'</span>
+
+</pre></li>
+
+</ul></p>

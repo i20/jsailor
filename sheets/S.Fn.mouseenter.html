@@ -1,0 +1,59 @@
+<h3><span class="keyword">JSailor</span> S.Fn.mouseenter(<span class="keyword">Function</span> callback)</h3>
+
+<p>Description:
+    <ul>
+        <li>Raccourci pour <pre>S.Fn.bind(<span class="string">'mouseenter'</span>, callback)</pre>(cf <a href="javascript:display('S.Fn.bind');">S.Fn.bind</a>).</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+    
+        <li>
+<pre class="script">
+<span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-<span class="current_version"></span>.min.js&quot;</span>&gt;</span><span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).mouseenter(<span class="keyword">function</span>(){
+            
+                <span class="keyword">alert</span>(<span class="string">'Evénement détecté!'</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Déplacez la souris ici!<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+</pre>
+
+<a href="tests/S.Fn.mouseenter.html" target="_blank">Tester ce code!</a>
+</li>   
+     
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor</span> S.Fn.mouseenter(<span class="keyword">Event</span> event)</h3>
+
+<p>Description:
+    <ul>
+        <li>Raccourci pour <pre>S.Fn.fire(<span class="string">'mouseenter'</span>, event)</pre>(cf <a href="javascript:display('S.Fn.fire');">S.Fn.fire</a>).</li>
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor</span> S.Fn.mouseenter()</h3>
+
+<p>Description:
+    <ul>
+        <li>Raccourci pour <pre>S.Fn.fire(<span class="string">'mouseenter'</span>)</pre>(cf <a href="javascript:display('S.Fn.fire');">S.Fn.fire</a>).</li>
+    </ul>
+</p>

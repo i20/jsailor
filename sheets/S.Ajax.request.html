@@ -1,0 +1,107 @@
+<h3><span class="keyword">Void</span> S.Ajax.request(<span class="keyword">Object</span> params)</h3>
+
+<p>Description:
+    <ul>
+        <li>Effectue une requête HTTP en utilisant toutes les données fournies dans <pre>params</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>params</pre> accepte les propriétés suivantes:
+            <ul>
+                <li><span class="keyword">String</span> <pre>url</pre>: (obligatoire) url du fichier à charger.</li>
+
+                <li><span class="keyword">String</span> <pre>method</pre>: (obligatoire) methode de la requête (<span class="string">'GET'</span> ou <span class="string">'POST'</span>).</li>
+
+                <li><span class="keyword">String</span> <pre>user</pre>: (requêtes avec authentification) login.</li>
+
+                <li><span class="keyword">String</span> <pre>password</pre>: (requêtes avec authentification) mot de passe.</li>
+
+                <li><span class="keyword">String</span> <pre>response</pre>: (optionnel) format de la réponse, à choisir parmis: <ul>
+                    <li><span class="string">'text'</span>: (par défaut) la réponse est fournie sous forme d'une chaine de caractères.</li>
+                    <li><span class="string">'js'</span>: la réponse est éxécutée comme étant du code JavaScript.</li>
+                    <li><span class="string">'json'</span>: la réponse est interprétée comme un objet JSON.</li>
+                    <li><span class="string">'xml'</span>: la réponse est interprétée comme un document XML.</li>
+                    <li><span class="string">'auto'</span>: le format de la réponse sera déterminé directement à partir de l'extension du fichier.</li>
+                </ul></li>
+
+                <li><span class="keyword">Boolean</span> <pre>async</pre>: (optionnel) mode synchrone(<pre class="keyword">false</pre>) ou asynchrone(<pre class="keyword">true</pre> par défaut) de la requête.</li>
+
+                <li><span class="keyword">String</span> <pre>charset</pre>: (optionnel) format d'encodage du fichier (<span class="string">'UTF-8'</span> par défaut).</li>
+
+                <li><span class="keyword">String</span> <pre>content</pre>: (optionnel) type MIME du résultat (<span class="string">'application/x-www-form-urlencoded'</span> par défaut).</li>
+
+                <li><span class="keyword">String</span> <pre>cache</pre>: (optionnel) mode d'utilisation du cache navigateur, les modes disponibles sont: <ul>
+                    <li><span class="string">'valid'</span>: (par défaut) éxécute des requêtes conditionnelles, la ressource est chargée du serveur si le cache est périmé. Si la ressource en cache est valide le rechargement n'est pas nécessaire et on économise de la bande passante.</li>
+                    <li><span class="string">'isset'</span>: charge la ressource de préférence depuis le cache, même périmé. Si la ressource n'est pas disponible en cache, une connexion au serveur est établie.</li>
+                    <li><span class="string">'only'</span>: ne charge la ressource que si cette dernière est disponible en cache. Utile dans le cas d'une très mauvaise connexion.</li>
+                    <li><span class="string">'never'</span>: la ressource est systématiquement chargée depuis le serveur et n'est pas mise en cache.</li>
+                </ul></li>
+
+                <li><span class="keyword">Boolean</span> <pre>dynamic</pre>: (optionnel) détermine si les ressources ayant une extension dynamiques(php, jsp…) doivent forcément être chargées depuis le serveur (ie mode <span class="string">'never'</span> du cache) (<pre class="keyword">true</pre> par défaut) ou si elles peuvent provenir du cache (<pre class="keyword">false</pre>).</li>
+
+                <li><span class="keyword">Object</span> <pre>headers</pre>: (optionnel) objet contenant les headers de requêtes à envoyer lors de la connexion au serveur sous la forme <pre>nomHeaderCamelCase: valeurHeader</pre>.</li>
+
+                <li><span class="keyword">Object</span> <pre>data</pre>: (optionnel) objet contenant les variables à poster sous la forme <pre>{ nomvar1: valvar1, nomvar2: valvar2 }</pre>(utile uniquement dans le cas de la méthode <span class="string">'POST'</span>).</li>
+
+                <li><span class="keyword">Multi</span> <pre>jscontext</pre>: (optionnel) expression correspondant à l'élément dans lequel est inséré le résultat de la requête HTTP(dans le cas d'une insertion HTML). Le code JavaScript ainsi inséré sera éxécuté.</li>
+                <li><span class="keyword">Function</span> <pre class="number">0</pre>: (optionnel) fonction qui sera éxécutée lorsque <pre>readyState === <span class="number">0</span></pre>.</li>
+                <li><span class="keyword">Function</span> <pre class="number">1</pre>: (optionnel) fonction qui sera éxécutée lorsque <pre>readyState === <span class="number">1</span></pre>.</li>
+                <li><span class="keyword">Function</span> <pre class="number">2</pre>: (optionnel) fonction qui sera éxécutée lorsque <pre>readyState === <span class="number">2</span></pre>.</li>
+                <li><span class="keyword">Function</span> <pre class="number">3</pre>: (optionnel) fonction qui sera éxécutée lorsque <pre>readyState === <span class="number">3</span></pre>.</li>
+                <li><span class="keyword">Function</span> <pre class="number">4</pre>: (optionnel) fonction qui sera éxécutée lorsque <pre>readyState === <span class="number">4</span></pre> c'est à dire au moment où la réponse du serveur a été complètement reçue, la requête est finie.</li>
+
+                <li><span class="keyword">Function</span> <pre class="number">5</pre>: (optionnel) fonction qui sera éxécutée après l'éxécution du code JS présent dans la ressource dans le cas de l'utilisation de <pre>jscontext</pre>.</li>
+
+                <li><span class="keyword">Function</span> <pre>complete</pre>: (optionnel) identique à <pre class="number">4</pre>.</li>
+
+                <li><span class="keyword">Function</span> <pre>evaluated</pre>: (optionnel) identique à <pre class="number">5</pre>.</li>
+
+                <li><span class="keyword">Function</span> <pre>success</pre>: (optionnel) fonction éxécutée une fois la requête finie et réussie.</li>
+
+                <li><span class="keyword">Function</span> <pre>fail</pre>: (optionnel) fonction éxécutée une fois la requête finie et échouée.</li>
+
+            </ul></li>
+            <li>Pour les fonctions de callback, <pre class="keyword">this</pre> est l'instance de l'objet <pre>XMLHttpRequest</pre> utilisée pour faire la requête et l'unique valeur fournie à la fonction est:<ul>
+                <li>si <pre>params.response === <span class="string">'text'</span></pre>: le contenu de la réponse sous forme de chaîne de caractères(<pre>responseText</pre>).</li>
+                <li>si <pre>params.response === <span class="string">'js'</span></pre>: le résultat de l'évaluation de la réponse en tant que script javacsript.</li>
+                <li>si <pre>params.response === <span class="string">'json'</span></pre>: l'objet JSON représenté par la réponse.</li>
+                <li>si <pre>params.response</pre> vaut <pre class="string">'xml'</pre> ou <pre class="string">'rss'</pre> ou <pre class="string">'atom'</pre> ou <pre class="string">'htm'</pre> ou <pre class="string">'html'</pre></span></pre>: l'arborescence XML de la réponse sous forme d'objet(<pre>responseXML</pre>).</li>
+            <li>Les identifiants incrustés dans l'URL(http://user:password@monsite.com/) sont supportés.</li>
+            </ul>
+        </li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="comment">//considérons d'abord un fichier 'data.json' contenant:</span>
+
+{
+    <span class="string">"prop1"</span>: <span class="string">"val1"</span>,
+    <span class="string">"prop2"</span>: <span class="string">"val2"</span>
+}
+
+<span class="comment">//considérons maintenant un autre fichier 'get.html' placé dans le même répertoire que 'data.json',
+//avec le script suivant:</span>
+
+S.Ajax.request({
+
+    url: <span class="string">'data.json'</span>,
+    method: <span class="string">'GET'</span>,
+    response: <span class="string">'auto'</span>,
+    success: <span class="keyword">function</span>(json){
+
+        <span class="keyword">alert</span>(json.prop1);
+    }
+
+});
+
+<span class="comment">//le code ci-dessus affiche un alert contenant 'val1'</span></pre>
+        </li>
+
+    </ul>
+</p>

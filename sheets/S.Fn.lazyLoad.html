@@ -1,0 +1,55 @@
+<h3><span class="keyword">JSailor</span> S.Fn.lazyLoad()</h3>
+
+<p>Description:
+    <ul>
+        <li>Ne charge les images de la sélection que lorsque ces dernières sont directement visibles dans la page, rendant ainsi les pages pleines d'images moins lourdes à charger.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Idée originale de Mika Tuupola (<a href="http://www.appelsiini.net/projects/lazyload">http://www.appelsiini.net/projects/lazyload</a>)</li>
+        <li>Les images ciblées par cette méthode doivent avoir l'attribut <pre class="attribut">lazysrc</pre> à la place de <pre class="attribut">src</pre></li>
+        <li>Pour une bonne stabilité, préciser les attributs <pre class="attribut">height</pre> et <pre class="attribut">width</pre> de toutes les images ciblées.</li>
+        <li>Seul la visibilité par rapport au scrolling de la page est prise en compte pour le moment.</li>
+        <li>Prise en charge des éléments scrollables imbriqués.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li><pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.5.min.js&quot;</span>&gt;</span><span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="comment">/* La ligne suivante sert à remplir le paragraphe du début du div
+            Il est tout à fait possible de le faire à la main, je suis juste fainéant ^^ */</span>
+            S(<span class="string">'p'</span>).loremIpsum();
+            S(<span class="string">'img'</span>).lazyLoad();
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span>
+        div
+        <span class="php">{
+            height: <span class="var">100px</span>;
+            overflow: <span class="var">scroll</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span><span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;img <span class="attribut">width</span>=<span class="string">&quot;1280px&quot;</span> <span class="attribut">height</span>=<span class="string">&quot;960px&quot;</span> <span class="attribut">lazysrc</span>=<span class="string">&quot;http://www.wallpapershut.com/wp-content/uploads/2011/02/18.jpg&quot;</span>/&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;img <span class="attribut">width</span>=<span class="string">&quot;1280px&quot;</span> <span class="attribut">height</span>=<span class="string">&quot;960px&quot;</span> <span class="attribut">lazysrc</span>=<span class="string">&quot;http://www.wallpapershut.com/wp-content/uploads/2011/02/18.jpg&quot;</span>/&gt;</span>
+        <span class="tag">&lt;img <span class="attribut">width</span>=<span class="string">&quot;1280px&quot;</span> <span class="attribut">height</span>=<span class="string">&quot;960px&quot;</span> <span class="attribut">lazysrc</span>=<span class="string">&quot;http://www.wallpapershut.com/wp-content/uploads/2011/02/18.jpg&quot;</span>/&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre><a href="tests/S.Fn.lazyLoad.html" target="_blank">Tester ce code!</a></li>
+
+    </ul>
+</p>

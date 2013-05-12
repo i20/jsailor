@@ -1,0 +1,35 @@
+<h3><span class="keyword">Number</span> S.Fn.height()</h3>
+
+<p>Description:
+    <ul>
+        <li>Retourne la largeur en pixels du contenu du premier élément de la sélection. Par opposition avec <pre>S.Fn.css(<span class="string">'width'</span>)</pre> qui peut renvoyer des valeurs par défaut telles que <pre class="string">'auto'</pre>. Cette fonction est particulièrement utile dans les calculs d'animations.</li>
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">Number</span> S.Fn.width(<span class="keyword">Number</span> limit)</h3>
+
+<p>Description:
+    <ul>
+        <li>Retourne la largeur en incluant les espacements jusqu'à la limite spécifiée.</li>
+    </ul>
+</p>
+
+<p>Remarque:
+    <ul>
+        <li>0: aucun espacement (contenu uniquement) (en jaune).</li>
+        <li>1: contenu + marge intérieure (padding) (en orange).</li>
+        <li>2: contenu + marge intérieure (padding) + bordure (en rouge).</li>
+        <li>3: contenu + marge intérieure (padding) + bordure + marge extérieure (margin) (en brun).</li>
+        <li>
+            <div style="background-color:brown;padding:10px;">
+                <div style="background-color:red;padding:2px;">
+                    <div style="background-color:orange;padding:10px;">
+                        <div style="background-color:yellow;padding:0px;">Contenu textuel</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</p>

@@ -1,0 +1,64 @@
+<h3><span class="keyword">Void</span> S.Math.each(<span class="keyword">Number</span> nb, <span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique <pre>fn</pre> à chaque chiffre composant <pre>nb</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Dans la fonction, <pre class="keyword">this</pre> est le chiffre courant.</li>
+        <li>La fonction peut prendre 2 arguments: la puissance de dix pondérant le chiffre courant dans <pre>nb</pre>; le chiffre courant(idem <pre class="keyword">this</pre>).</li>
+        <li>Si <pre>nb</pre> est négatif, les chiffres le composant seront tous négatifs.</li>
+        <li>Les chiffres sont traités dans l'ordre des puissances de dix décroissantes.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script">
+<span class="keyword">var</span> calcul = <span class="string">''</span>;
+
+S.Math.each(<span class="number">4408</span>, <span class="keyword">function</span>(i, n){
+
+    calcul += (calcul ? <span class="string">' + '</span> : <span class="string">''</span>) + n + <span class="string">'*10^'</span> + i;
+});
+
+<span class="keyword">document</span>.write(calcul);
+<span class="comment">//affiche '4*10^3 + 4*10^2 + 0*10^1 + 8*10^0'</span>
+</pre>
+        </li>
+
+        <li>
+<pre class="script">
+<span class="keyword">var</span> calcul = <span class="string">''</span>;
+
+S.Math.each(<span class="number">0.57</span>, <span class="keyword">function</span>(i, n){
+
+    calcul += (calcul ? <span class="string">' + '</span> : <span class="string">''</span>) + n + <span class="string">'*10^'</span> + i;
+});
+
+<span class="keyword">document</span>.write(calcul);
+<span class="comment">//affiche '0*10^0 + 5*10^-1 + 7*10^-2'</span>
+</pre>
+        </li>
+
+        <li>
+<pre class="script">
+<span class="keyword">var</span> calcul = <span class="string">''</span>;
+
+S.Math.each(<span class="number">-4408</span>, <span class="keyword">function</span>(i, n){
+
+    calcul += (calcul ? <span class="string">' + '</span> : <span class="string">''</span>) + n + <span class="string">'*10^'</span> + i;
+});
+
+<span class="keyword">document</span>.write(calcul);
+<span class="comment">//affiche '-4*10^3 + -4*10^2 + 0*10^1 + -8*10^0'</span>
+</pre>
+        </li>
+
+    </ul>
+</p>

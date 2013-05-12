@@ -1,0 +1,11 @@
+<h3><span class="keyword">JSailor</span> S.Fn.unlivebind(<span class="keyword">String</span> type, <span class="keyword">Function</span> fn, <span class="keyword">Boolean</span> bool)</h3>
+
+<p>Description:<ul>
+    <li>Empêche l'attache du gestionnaire d'événement aux futurs éléments couverts par l'expression de sélection. Cela revient à annuler l'utilisation de <pre>S.Fn.livebind()</pre>.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li><pre>type</pre> correspond au type d'événement non préfixé par <span class="string">'on'</span>.</li>
+    <li><pre>bool</pre> est un booléen optionnel qui, passé à <pre class="keyword">true</pre>, permet de retirer les gestionnaires d'événements déjà attachés sans quoi ces derniers resteraient en place.</li>
+    <li>Il vous est possible d'empêcher d'attacher <pre>fn</pre> à plusieurs événements simultanément en utilisant la syntaxe <span class="string">'type1 type2 type3'</span> pour <pre>type</pre>.</li>
+</ul></p>

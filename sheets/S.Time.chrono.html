@@ -1,0 +1,26 @@
+<h3><span class="keyword">Number</span> S.Time.chrono(<span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Exécute la fonction <pre>fn</pre> et renvoie le temps en millisecondes mis pour l'exécuter.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script">
+<span class="keyword">document</span>.write( S.Time.chrono(<span class="keyword">function</span>(){
+    
+    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i < <span class="number">1000000</span>; i++){};
+}) );
+        
+<span class="comment">//affiche environ 3 (dépend de votre navigateur)</span>
+</pre>
+
+<a href="tests/S.Time.chrono.html" target="_blank">Tester ce code!</a>
+        </li>
+
+    </ul>
+</p>

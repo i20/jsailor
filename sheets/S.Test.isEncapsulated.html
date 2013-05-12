@@ -1,0 +1,26 @@
+<h3><span class="keyword">Boolean</span> S.Test.isEncapsulated(<span class="keyword">Char</span>+<span class="keyword">Number</span> argument, <span class="keyword">String</span> chaine)</h3>
+
+<p>Description:<ul>
+    <li>Renvoie <pre class="keyword">true</pre> si <pre>argument</pre> est entre parenthèses dans <pre>chaine</pre>, <pre class="keyword">false</pre> sinon.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li>Si <pre>argument</pre> est un caractère alors la méthode testera l'encapsulation de la première occurence de <pre>argument</pre> dans <pre>chaine</pre>.</li>
+    <li>Si <pre>argument</pre> est un nombre alors la méthode testera l'encapsulation du caractère situé à la position <pre>argument</pre> dans <pre>chaine</pre>.</li>
+    <li>Un caractère situé après une parenthèse ouvrante ne se refermant pas est considéré comme encapsulé.</li>
+</ul></p>
+
+<p>Exemples:<ul>
+<li class="script"><pre><span class="keyword">alert</span>(S.Test.isEncapsulated(<span class="string">'s'</span>, <span class="string">'ami(s)'</span>) ? <span class="string">'encapsulé'</span> : <span class="string">'libre'</span>);
+<span class="comment">//affiche un alert contenant 'encapsulé'</span></pre></li>
+<li class="script"><pre><span class="keyword">alert</span>(S.Test.isEncapsulated(<span class="string">'e'</span>, <span class="string">'amie(s)'</span>) ? <span class="string">'encapsulé'</span> : <span class="string">'libre'</span>);
+<span class="comment">//affiche un alert contenant 'libre'</span></pre></li>
+<li class="script"><pre><span class="keyword">alert</span>(S.Test.isEncapsulated(<span class="number">4</span>, <span class="string">'ami(s)'</span>) ? <span class="string">'encapsulé'</span> : <span class="string">'libre'</span>);
+<span class="comment">//affiche un alert contenant 'encapsulé'</span></pre></li>
+<li class="script"><pre><span class="keyword">alert</span>(S.Test.isEncapsulated(<span class="number">4</span>, <span class="string">'ami(s'</span>) ? <span class="string">'encapsulé'</span> : <span class="string">'libre'</span>);
+<span class="comment">//affiche un alert contenant 'encapsulé'</span></pre></li>
+<li class="script"><pre><span class="keyword">alert</span>(S.Test.isEncapsulated(<span class="string">'s'</span>, <span class="string">'ami)(s)'</span>) ? <span class="string">'encapsulé'</span> : <span class="string">'libre'</span>);
+<span class="comment">//affiche un alert contenant 'encapsulé'</span></pre></li>
+<li class="script"><pre><span class="keyword">alert</span>(S.Test.isEncapsulated(<span class="string">'s'</span>, <span class="string">'super ami(s)'</span>) ? <span class="string">'encapsulé'</span> : <span class="string">'libre'</span>);
+<span class="comment">//affiche un alert contenant 'libre'</span></pre></li>
+</ul></p>

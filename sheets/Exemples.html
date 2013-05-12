@@ -1,0 +1,87 @@
+<h3>Exemples simples d'utilisation</h3>
+
+<p>Nous allons voir ci-dessous quelques exemples concrets de ce que vous permet de faire JSailor.</p>
+
+<div class="script"><pre><span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;ici l&#39;adresse du fichier de la librairie&quot;</span><span class="tag">&gt;&lt;/script&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span><span class="tag">&gt;</span>
+
+        <span class="keyword">var</span> reset = <span class="keyword">function</span>(){
+
+            <span class="keyword">var</span> but = S(<span class="string">'#button4'</span>);
+
+            but.youngers().remove();
+
+            but.follow(<span class="string">'<p>Je suis le paragraphe qui va subir les changements!</p>'</span>);
+        };
+
+        S(<span class="keyword">function</span>(){
+
+            reset();
+
+            S(<span class="string">'#button1'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="keyword">this</span>).siblings(<span class="string">'p'</span>).html( <span class="keyword">prompt</span>(<span class="string">'Tapez le nouveau contenu du paragraphe'</span>) );
+            });
+
+            S(<span class="string">'#button2'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="keyword">this</span>).siblings(<span class="string">'p'</span>).tune({
+
+                    <span class="string">'color'</span>: <span class="string">'orange'</span>,
+                    <span class="string">'font-size'</span>: <span class="string">'3em'</span>
+
+                }, <span class="number">1000</span>);
+            });
+
+            S(<span class="string">'#button3'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="keyword">this</span>).next().follow( S(<span class="keyword">this</span>).siblings(<span class="string">'p'</span>).clone() );
+            });
+
+            S(<span class="string">'#button4'</span>).click(reset);
+        });
+
+    <span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span></pre></div>
+
+<div class="foo" style="background-color:red;">
+    <button id="button1">Changer le texte qui suit...</button>
+    <button id="button2">Changer la couleur du texte et le grossir...</button>
+    <button id="button3">Cloner l'élément qui contient le texte ci dessous...</button>
+    <button id="button4">Réinitialiser…</button>
+</div>
+<script>
+var reset = function(){
+
+    var but = S('#button4');
+
+    but.youngers().remove();
+
+    but.follow('<p>Je suis le paragraphe qui va subir les changements!</p>');
+};
+
+reset();
+
+S('#button1').click(function(){
+
+    S(this).siblings('p').html( prompt('Tapez le nouveau contenu du paragraphe') );
+});
+
+S('#button2').click(function(){
+
+    S(this).siblings('p').tune({
+
+        'color': 'orange',
+        'font-size': '3em'
+
+    }, 1000);
+});
+
+S('#button3').click(function(){
+
+    S(this).next().follow( S(this).siblings('p').clone() );
+});
+
+S('#button4').click(reset);
+</script>

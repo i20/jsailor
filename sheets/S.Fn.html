@@ -1,0 +1,35 @@
+<h3><span class="keyword">Object</span> S.Fn</h3>
+
+<p>Ce sous objet contient toutes les méthodes applicables à n'importe quelle instance JSailor. C'est en réalité le prototype <pre>S.JSailor.<span class="keyword">prototype</span></pre>. La plupart de ces méthodes renvoyant elles mêmes une nouvelle instance JSailor, cela vous permet de <span class="string">"chaîner"</span> vos actions.</p>
+
+<p>Remarques:<ul>
+    <li>Il vous est possible de chaîner autant d'actions que vous le souhaitez.</li>
+    <li>Il est impossible de chaîner une action si l'action précédente ne renvoie pas une instance JSailor (ex: <pre>S(<span class="string">'p'</span>).color().append(<span class="string">'&lt;p&gt;Para&lt;/p&gt;'</span>)</pre> car <pre>color()</pre> renvoie ici une couleur et non une instance JSailor).</li>
+    <li>Il est par contre possible de mettre une action qui renvoie autre chose que du JSailor à la fin d'une chaîne.</li>
+    <li>Les actions seront effectuées dans l'ordre de la chaîne sauf si l'action suit un <pre>tune()</pre>, elle se déclenchera juste après l'appel à ce dernier ne laissant pas le temps à l'animation de se faire d'où l'intérêt du callback (cf: <a href="javascript:display('S.Fn.tune');">S.Fn.tune</a>).</li>
+</ul></p>
+
+<p>Exemples:
+    <ul>
+
+        <li><pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.5.min.js&quot;</span>&gt;</span><span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>)
+                .html(<span class="string">'Paragraphe vert'</span>)
+                .css(<span class="string">'color'</span>, <span class="string">'green'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span><span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre><a href="tests/S.Fn.html" target="_blank">Tester ce code!</a></li>
+
+    </ul>
+</p>

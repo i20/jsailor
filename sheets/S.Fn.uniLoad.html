@@ -1,0 +1,39 @@
+<h3><span class="keyword">JSailor</span> S.Fn.uniLoad(<span class="keyword">Boolean</span> fade, <span class="keyword">Number</span> delay)</h3>
+
+<p>Description:
+    <ul>
+        <li>N'affiche les images de la sélection que lorsque celles ci sont complètement chargées, elles apparaissent donc d'un bloc et pas bout par bout.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Si <pre>fade</pre> est passé à <pre class="keyword">true</pre> alors, l'image apparaitra progressivement en <pre>delay</pre> millisecondes.</li>
+        <li>Les images ciblées par cette méthode doivent avoir l'attribut <pre class="attribut">unisrc</pre> à la place de <pre class="attribut">src</pre></li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li><pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.5.min.js&quot;</span>&gt;</span><span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'#img1'</span>).uniLoad();
+            S(<span class="string">'#img2'</span>).uniLoad(<span class="keyword">true</span>, <span class="number">2000</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;img <span class="attribut">id</span>=<span class="string">&quot;img1&quot;</span> <span class="attribut">unisrc</span>=<span class="string">&quot;http://www.wallpapershut.com/wp-content/uploads/2011/02/18.jpg&quot;</span>/&gt;</span>
+        <span class="tag">&lt;img <span class="attribut">id</span>=<span class="string">&quot;img2&quot;</span> <span class="attribut">unisrc</span>=<span class="string">&quot;http://www.wallpapershut.com/wp-content/uploads/2011/02/18.jpg&quot;</span>/&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre></li>
+
+    </ul>
+</p>

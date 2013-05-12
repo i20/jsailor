@@ -1,0 +1,51 @@
+<h3><span class="keyword">Object</span> S.Css.getStyleOf(<span class="keyword">Element</span> elt)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie un objet contenant le style de <pre>elt</pre> sous la forme <pre>propriete_css: valeur</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarque:
+    <ul>
+        <li>Les propriétés css sont accessibles par leur nom à la mode JavaScript(<pre>fontSize</pre> au lieu de <pre>font-size</pre>).</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">var</span> style = S.Css.getStyleOf( <span class="keyword">document</span>.getElementsByTagName(<span class="string">'p'</span>)[<span class="number">0</span>] );
+
+            <span class="keyword">alert</span>( style.color );
+            <span class="comment">//affiche un alert contenant 'red' ou sa valeur RGB</span>
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        body
+        <span class="php">{
+            color<span class="var">: red</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

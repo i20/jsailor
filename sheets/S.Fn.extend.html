@@ -1,0 +1,55 @@
+<h3><span class="keyword">JSailor</span> S.Fn.extend(<span class="keyword">Object</span> obj)</h3>
+
+<p>Description:
+    <ul>
+        <li>Etend le prototype de l'objet JSailor avec les propriétés de <pre>obj</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Fonctionne identiquement à <a href="javascript:display('S.Object.extend');">S.Object.extend</a> appliquée sur l'objet parent.</li>
+        <li>Cette méthode est surtout utile pour les développeurs souhaitant étendre JSailor en y ajoutant des méthodes.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S.Fn.extend({
+
+            maMethode: <span class="keyword">function</span>(info){
+
+                <span class="keyword">alert</span>( <span class="keyword">this</span>[info]() );
+            }
+        });
+
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="keyword">this</span>).maMethode(<span class="string">'html'</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

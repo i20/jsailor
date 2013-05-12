@@ -1,0 +1,54 @@
+<h3><span class="keyword">JSailor</span> S.Fn.drag(<span class="keyword">Object</span> options, <span class="keyword">Function</span> callback(<span class="keyword">Point</span> delta))</h3>
+
+<p>Description:
+    <ul>
+        <li>Rend les éléments ciblés déplaçables à la souris.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Les 2 paramètres sont facultatifs.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li><pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.5.min.js&quot;</span>&gt;</span><span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">var</span> divs = S(<span class="string">'div'</span>);
+
+            divs.item(<span class="number">0</span>).drag();
+            divs.item(<span class="number">1</span>).drag(<span class="keyword">function</span>(delta){
+
+                <span class="keyword">alert</span>(<span class="string">'J\'ai bougé d\'un vecteur ('</span> + delta.x + <span class="string">', '</span> + delta.y + <span class="string">')'</span>);
+            });
+            divs.item(<span class="number">2</span>).drag({ method: <span class="string">'ghost'</span> });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span>
+        div
+        <span class="php">{
+            background-color: <span class="var">red</span>;
+            height: <span class="var">30px</span>;
+            width: <span class="var">30px</span>;
+            position: <span class="var">absolute</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div <span class="attribut">style</span>=<span class="string">&quot;top:0px&quot;</span>&gt;</span>1<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div <span class="attribut">style</span>=<span class="string">&quot;top:40px&quot;</span>&gt;</span>2<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div <span class="attribut">style</span>=<span class="string">&quot;top:80px&quot;</span>&gt;</span>3<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre><a href="tests/S.Fn.drag.html" target="_blank">Tester ce code!</a></li>
+
+    </ul>
+</p>

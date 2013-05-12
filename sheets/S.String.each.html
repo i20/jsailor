@@ -1,0 +1,27 @@
+<h3><span class="keyword">Void</span> S.String.each(<span class="keyword">String</span> str, <span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique <pre>fn</pre> à chaque caractère de <pre>str</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>L'utilisation du mot clé <pre class="keyword">this</pre> dans le corps de fonction fait référence au caractère courant.</li>
+        <li>La fonction prend 2 paramètres: l'index du caractère courant; le caractère courant(idem <pre class="keyword">this</pre>).</li>
+        <li>Si la fonction renvoie <pre class="keyword">false</pre> la boucle est stoppée(<pre class="keyword">break</pre>).</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre>S.String.each(<span class="string">'Une chaine quelconque'</span>, <span class="keyword">function</span>(i, char){
+
+    <span class="keyword">alert</span>(<span class="string">'position: '</span> + i + <span class="string">'; caractère: '</span> + <span class="keyword">this</span>);
+});
+<span class="comment">//affiche une suite d'alert contenant: 'position: 0; caractère: U', 'position: 1; caractère: n' etc…</span></pre></li>
+
+    </ul>
+</p>

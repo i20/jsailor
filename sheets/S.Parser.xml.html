@@ -1,0 +1,21 @@
+<h3><span class="keyword">Document</span> S.Parser.xml(<span class="keyword">String</span> text)</h3>
+
+<p>Description:
+    <ul>
+        <li>Evalue le texte comme étant un document XML et retourne ce document.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script">
+<span class="keyword">var</span> doc = S.Parser.xml(<span class="string">'&lt;root&gt;&lt;/root&gt;'</span>);
+<span class="keyword">document</span>.write(doc.documentElement);
+<span class="comment">//affiche '[object Element]'</span>
+</pre>
+        </li>
+
+    </ul>
+</p>

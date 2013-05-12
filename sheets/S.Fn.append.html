@@ -1,0 +1,9 @@
+<h3><span class="keyword">JSailor</span> S.Fn.append(<span class="keyword">String</span>+<span class="keyword">JSailor</span>+<span class="keyword">Element</span> insert)</h3>
+
+<p>Description:<ul>
+    <li>Insère le modèle <pre>insert</pre> en dernier enfant de chaque élément de la collection et renvoie l'objet JSailor basé sur les éléments insérés.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li>Si <pre>insert</pre> est un élément HTML ou un objet JSailor, donc comporte des références sur des éléments déjà existants dans le <pre class="keyword">document</pre> alors ces derniers seront déplacés et non clonés lors de l'application sur le premier élément de la collection. Les applications suivantes seront faites à partir de clones de <pre>insert</pre>.</li>
+</ul></p>

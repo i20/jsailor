@@ -1,0 +1,29 @@
+<h3><span class="keyword">Boolean</span> S.Object.isExtensible(<span class="keyword">Object</span> obj)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie <pre class="keyword">true</pre> si <pre>obj</pre> est extensible, c'est à dire que l'on peut lui rajouter de nouvelles propriétés.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Tous les objets définis par l'utilisateur sont par défaut extensibles.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+    
+<li class="script"><pre><span class="keyword">var</span> obj = {};
+
+<span class="keyword">alert</span>( S.Object.isExtensible(obj) ? <span class="string">'extensible'</span> : <span class="string">'non extensible'</span> );
+<span class="comment">//affiche un alert contenant 'extensible'</span>
+</pre></li>
+
+<li class="script"><pre><span class="keyword">alert</span>( S.Object.isExtensible(ActiveXObject) ? <span class="string">'extensible'</span> : <span class="string">'non extensible'</span> );
+<span class="comment">//affiche un alert contenant 'non extensible'(dans le cas où ActiveXObject existe)</span>
+</pre></li>
+
+    </ul>
+</p>

@@ -1,0 +1,29 @@
+<h3><span class="keyword">String</span> S.Cookie.get(<span class="keyword">String</span> nom)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie la valeur du cookie <pre>nom</pre> situé sur l'ordinateur de l'internaute.</li>
+    </ul>
+</p>
+
+<p>Remarque:
+    <ul>
+        <li>Le cookie à lire doit être accessible par la page.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="comment">//Considérons d'abord un cookie créé de la manière suivante:</span>
+S.Cookie.set(<span class="string">'user_id'</span>, <span class="string">'234'</span>);
+
+<span class="comment">//Tentons ensuite de lire le cookie qui vient d'être créé:</span>
+<span class="keyword">alert</span>( S.Cookie.get(<span class="string">'user_id'</span>) );
+
+<span class="comment">//L'ensemble du code ci-dessus affiche un alert contenant '234'</span></pre>
+        </li>
+
+    </ul>
+</p>

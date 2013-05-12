@@ -1,0 +1,21 @@
+<h3><span class="keyword">Object</span> S.Filter</h3>
+
+<p>Sous objet de la librairie contenant les filtres de sélection d'éléments couramment appelés pseudo-classes tels que <span class="string">':nth-child()'</span>, <span class="string">':input'</span> etc…</p>
+
+<p>Cet objet a été rendu accessible dans le but de faciliter son extension par les programmeurs tiers, il suffit pour cela de lui rajouter une propriété du nom du filtre écrite à la mode JavaScript (camelCase) dont la valeur est une fonction avec paramètre si la pseudo-classe en nécessite (cf :nth-child) ou pas (cf :input). Cette fonction devra être un prédicat sur élément (ie renvoyer true si l'élément correspond à la pseudo-classe, false sinon). Dans le corps de la fonction le mot clé this désigne l'élément testé.</p>
+
+<p>Exemples:
+    <ul>
+
+<li><pre class="script"><span class="comment">//un exemple bidon mais qui vaut mieux qu'un long discours</span>
+S.Filter.isDiv = <span class="keyword">function</span>(){
+
+    <span class="keyword">return</span> <span class="keyword">this</span>.tagName === <span class="string">'DIV'</span>;
+};
+
+<span class="comment">//utilisable de cette manière par la suite</span>
+S(<span class="string">':is-div'</span>)…
+<span class="comment">//notons que ceci est strictement équivalent à S('div')</span></pre></li>
+
+    </ul>
+</p>

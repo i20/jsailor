@@ -1,0 +1,30 @@
+<h3><span class="keyword">Boolean</span> S.Object.isSealed(<span class="keyword">Object</span> obj)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie <pre class="keyword">true</pre> si <pre>obj</pre> est non extensible et qu'aucune de ses propriétés ne peut être supprimée.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>En construction, ne pas utiliser !</li>
+        <li>Tous les objets définis par l'utilisateur sont par défaut extensibles.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+    
+<li class="script"><pre><span class="keyword">var</span> obj = {};
+
+<span class="keyword">alert</span>( S.Object.isSealed(obj) ? <span class="string">'sealed'</span> : <span class="string">'unsealed'</span> );
+<span class="comment">//affiche un alert contenant 'unsealed'</span>
+</pre></li>
+
+<li class="script"><pre><span class="keyword">alert</span>( S.Object.isSealed(ActiveXObject) ? <span class="string">'sealed'</span> : <span class="string">'unsealed'</span> );
+<span class="comment">//affiche un alert contenant 'sealed'(dans le cas où ActiveXObject existe)</span>
+</pre></li>
+
+    </ul>
+</p>

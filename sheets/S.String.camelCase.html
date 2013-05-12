@@ -1,0 +1,21 @@
+<h3><span class="keyword">String</span> S.String.camelCase(<span class="keyword">String</span> chaine, <span class="keyword">Char</span> char)</h3>
+
+<p>Description:<ul>
+    <li>Renvoie <pre>chaine</pre> dans son écriture dite <span class="string">"CamelCase"</span>, en prenant en compte le caractère <pre>char</pre> en tant que séparateur.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li><pre>chaine</pre> sera en camelCase(ou <span class="string">lowerCamelCase</span>) si la chaine commençait par une minuscule, et en CamelCase(ou <span class="string">UpperCamelCase</span>) si la chaine commençait par une majuscule.</li>
+</ul></p>
+
+<p>Exemples:<ul>
+    <li class="script"><pre><span class="keyword">var</span> chaine1 = <span class="string">'Une chaine de caractères quelconque'</span>;
+<span class="keyword">alert</span>( S.String.camelCase(chaine1, <span class="string">' '</span>) );
+<span class="comment">//affiche un alert contenant 'UneChaineDeCaractèresQuelconque'</span></pre></li>
+    <li class="script"><pre><span class="keyword">var</span> chaine2 = <span class="string">'Une chaine de caractères quelconque'</span>;
+<span class="keyword">alert</span>( S.String.camelCase(chaine2, <span class="string">'-'</span>) );
+<span class="comment">//affiche un alert contenant 'Une chaine de caractères quelconque'</span></pre></li>
+    <li class="script"><pre><span class="keyword">var</span> chaine3 = <span class="string">'parse-int'</span>;
+<span class="keyword">alert</span>( S.String.camelCase(chaine3, <span class="string">'-'</span>) );
+<span class="comment">//affiche un alert contenant 'parseInt'</span></pre></li>
+</ul></p>

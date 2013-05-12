@@ -1,0 +1,149 @@
+<h3><span class="keyword">Variant</span> S.Fn.css(<span class="keyword">String</span> prop)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie la valeur de la propriété css <pre>prop</pre> du premier élément de la collection.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Les nom des propiétés css peuvent être écrites à la mode javascript(ex: <span class="string">'fontSize'</span>) où à la mode css(ex <span class="string">'font-size'</span>) indifféremment.</li>
+        <li>La propriété de style <pre>float</pre> est accessible via l'écriture <span class="string">'float'</span> pour tous les navigateurs(ne pas écrire <span class="string">'cssFloat'</span> ou <span class="string">'styleFloat'</span>).</li>
+        <li>Idem pour <pre>opacity</pre>(ne pas écrire <span class="string">'filter'</span>).</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">alert</span>( S(<span class="string">'p'</span>).css(<span class="string">'background-color'</span>) );
+            <span class="comment">//affiche un alert contenant 'blue' ou sa forme RGB suivant le navigateur</span>
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style&gt;</span>
+        p<span class="var">:first-child</span>
+        <span class="php">{
+            background-color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor</span> S.Fn.css(<span class="keyword">String</span> prop, <span class="keyword">Variant</span> value)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique la valeur <pre>value</pre> à la propriété css <pre>prop</pre> de chaque élément de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Il vous est possible d'écrire des valeurs sous la forme opérateur/espace/valeur/unité (ex <span class="string">'+ 2px'</span>). La valeur finale sera calculée à partir de l'ancienne valeur pour chaque élément, et sera dans l'unité demandée. Attention à bien mettre un espace car <span class="string">'-10px'</span> n'équivaut pas à <span class="string">'- 10px'</span>! Accessible pour +, -, /, *, %, ^.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).css(<span class="string">'background-color'</span>, <span class="string">'orange'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor</span> S.Fn.css(<span class="keyword">Object</span> css)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique le style déterminé par <pre>css</pre> à chaque élément de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>css</pre> est composé des couples <pre>prop_css: valeur_css</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).css({
+
+                <span class="string">'background-color'</span>: <span class="string">'orange'</span>,
+                <span class="string">'font-size'</span>: <span class="string">'2em'</span>,
+                <span class="string">'border'</span>: <span class="string">'2px solid red'</span>
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

@@ -1,0 +1,31 @@
+<h3><span class="keyword">Array</span> S.Array.clone(<span class="keyword">Array</span> arr)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie une copie intégrale de <pre>arr</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>La copie peut ainsi être modifiée sans altérer l'array original <pre>arr</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="keyword">var</span> modele = [<span class="string">'a'</span>, <span class="string">'b'</span>],
+    clone = S.Array.clone(modele),
+    pointeur = modele;
+
+clone[<span class="number">0</span>] = <span class="string">'z'</span>;
+<span class="comment">//clone[0] = 'z', modele[0] = pointeur[0] = 'a'</span>
+
+pointeur[<span class="number">0</span>] = <span class="string">'e'</span>;
+<span class="comment">//clone[0] = 'z', modele[0] = pointeur[0] = 'e'</span></pre>
+        </li>
+
+    </ul>
+</p>

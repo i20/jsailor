@@ -1,0 +1,25 @@
+<h3><span class="keyword">Void</span> S.Array.each(<span class="keyword">Array</span> base, <span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique <pre>fn</pre> à chaque item de <pre>base</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>L'utilisation du mot clé <pre class="keyword">this</pre> dans le corps de fonction fait référence à la valeur de la propriété(ou item) sur laquelle est appliquée <pre>fn</pre>.</li>
+        <li><pre>fn</pre> prend 2 paramètres de cette manière, <pre>fn(<span class="keyword">String</span>+<span class="keyword">Number</span> i, <span class="keyword">Variant</span> valeur)</pre>: <pre>i</pre> est la clé(ou item) sur laquelle est appliquée <pre>fn</pre>; <pre>valeur</pre> est la valeur de la propriété(ou item)(idem <pre class="keyword">this</pre>).</li>
+        <li>Si la clé est numérique dans l'objet alors <pre>i</pre> sera un nombre sinon une chaine.</li>
+        <li>Si <pre>base</pre> est un array alors <pre>i</pre> sera toujours un nombre.</li>
+        <li><pre>fn</pre> peut renvoyer le booléen <pre class="keyword">false</pre> qui équivaut au mot clé <pre class="keyword">break</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+
+
+    </ul>
+</p>

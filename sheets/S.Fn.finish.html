@@ -1,0 +1,194 @@
+<h3><span class="keyword">JSailor</span> S.Fn.finish(<span class="keyword">String</span> prop, <span class="keyword">Boolean</span> toend)</h3>
+
+<p>Description:
+    <ul>
+        <li>Termine instantanément les animations sur la propriété css <pre>prop</pre> de tous les éléments de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Si le booléen <pre>toend</pre> est passé à <pre class="keyword">true</pre> alors le style de chaque élément sera mis au style final décrit lors de l'appel à <pre>S.Fn.tune()</pre> et le callback fourni lors de cet appel sera également appliqué si toutes les animations de style sur cet élément ont été amenées à leur valeur finale.</li>
+        <li>Si <pre>toend</pre> est passé à <pre class="keyword">false</pre> ou n'est pas fourni alors l'animation sur le style sera simplement stoppée, l'élément gardant le style acquis à l'instant précédent. Le callback ne sera pas appelé.</li>
+        <li>Si <pre>prop</pre> n'est pas fourni alors toutes les animations de style seront stoppées par défaut.</li>
+        <li>Il vous est possible de terminer plusieurs animations de style simultanément en utilisant la syntaxe <span class="string">'prop1 prop2 prop3'</span>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'#on'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).tune({
+
+                    <span class="string">'font-size'</span>: <span class="string">'3em'</span>,
+                    <span class="string">'color'</span>: <span class="string">'#FFA500'</span>
+
+                }, <span class="number">1000</span>, <span class="keyword">function</span>(){
+
+                    <span class="keyword">alert</span>(<span class="string">'Animation terminée!'</span>);
+                });
+            });
+
+            S(<span class="string">'#off'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).finish();
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        p
+        <span class="php">{
+            color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"on"</span>&gt;</span>Déclenchez l'effet!<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"off"</span>&gt;</span>Finir l'animation.<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'#on'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).tune({
+
+                    <span class="string">'font-size'</span>: <span class="string">'3em'</span>,
+                    <span class="string">'color'</span>: <span class="string">'#FFA500'</span>
+
+                }, <span class="number">1000</span>, <span class="keyword">function</span>(){
+
+                    <span class="keyword">alert</span>(<span class="string">'Animation terminée!'</span>);
+                });
+            });
+
+            S(<span class="string">'#off'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).finish(<span class="keyword">true</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        p
+        <span class="php">{
+            color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"on"</span>&gt;</span>Déclenchez l'effet!<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"off"</span>&gt;</span>Finir l'animation.<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'#on'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).tune({
+
+                    <span class="string">'font-size'</span>: <span class="string">'3em'</span>,
+                    <span class="string">'color'</span>: <span class="string">'#FFA500'</span>
+
+                }, <span class="number">1000</span>, <span class="keyword">function</span>(){
+
+                    <span class="keyword">alert</span>(<span class="string">'Animation terminée!'</span>);
+                });
+            });
+
+            S(<span class="string">'#off'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).finish(<span class="string">'color'</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        p
+        <span class="php">{
+            color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"on"</span>&gt;</span>Déclenchez l'effet!<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"off"</span>&gt;</span>Finir l'animation.<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'#on'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).tune({
+
+                    <span class="string">'font-size'</span>: <span class="string">'3em'</span>,
+                    <span class="string">'color'</span>: <span class="string">'#FFA500'</span>
+
+                }, <span class="number">1000</span>, <span class="keyword">function</span>(){
+
+                    <span class="keyword">alert</span>(<span class="string">'Animation terminée!'</span>);
+                });
+            });
+
+            S(<span class="string">'#off'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).finish(<span class="string">'color'</span>, <span class="keyword">true</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        p
+        <span class="php">{
+            color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"on"</span>&gt;</span>Déclenchez l'effet!<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attribut">id</span>=<span class="string">"off"</span>&gt;</span>Finir l'animation.<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

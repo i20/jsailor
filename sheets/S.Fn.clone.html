@@ -1,0 +1,39 @@
+<h3><span class="keyword">JSailor</span> S.Fn.clone()</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie un objet JSailor basé sur les clones des éléments du précédent.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'div'</span>).append( S(<span class="string">'.clones'</span>).clone() );
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        #clone_parent
+        <span class="php">{
+            color<span class="var">: red</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p <span class="attribut">class</span>=<span class="string">"clones"</span>&gt;</span>Paragraphe 1<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;div&gt;</span>Je suis le parent des clones.<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;span <span class="attribut">class</span>=<span class="string">"clones"</span>&gt;</span>Span 1<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

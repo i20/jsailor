@@ -1,0 +1,28 @@
+<h3><span class="keyword">String</span> S.Test.toString(<span class="keyword">Variant</span> valeur)</h3>
+
+<p>Description:<ul>
+    <li>Renvoie une chaîne de caractère représentant le constructeur de <pre>valeur</pre>.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li>La valeur de retour dépend du navigateur.</li>
+    <li>Cette fonction est en faite la méthode <pre>toString()</pre> de l'objet <span class="keyword">Object</span>(idem <pre><span class="keyword">Object</span>.<span class="keyword">prototype</span>.<span class="keyword">toString</span></pre>).</li>
+    <li>Certaines valeurs de retour sont communes à tous les navigateurs comme:<ul>
+        <li><span class="string">'[object Function]'</span> si <pre>valeur</pre> est une fonction</li>
+        <li><span class="string">'[object Array]'</span> si <pre>valeur</pre> est un array</li>
+        <li><span class="string">'[object String]'</span> si <pre>valeur</pre> est une chaîne de caractères</li>
+        <li><span class="string">'[object Number]'</span> si <pre>valeur</pre> est un nombre</li>
+        <li><span class="string">'[object Boolean]'</span> si <pre>valeur</pre> est un booléen</li>
+        <li><span class="string">'[object Text]'</span> si <pre>valeur</pre> est un noeud texte</li>
+        <li><span class="string">'[object Object]'</span> si <pre>valeur</pre> est un objet</li>
+    </ul></li>
+</ul></p>
+
+<p>Exemples:<ul>
+<li class="script"><pre><span class="keyword">var</span> valeur = [<span class="string">'un'</span>, <span class="string">'deux'</span>];
+<span class="keyword">alert</span>(S.Test.toString(valeur));
+<span class="comment">//affiche un alert contenant '[object Array]'</span></pre></li>
+<li class="script"><pre><span class="keyword">var</span> valeur = <span class="keyword">document</span>;
+<span class="keyword">alert</span>(S.Test.toString(valeur));
+<span class="comment">/*affiche un alert contenant '[object HTMLDocument]' si le navigateur est Firefox ou Safari(voire Opera),
+'[object]' si vous utilisez Internet Explorer*/</span></pre></li></ul></p>

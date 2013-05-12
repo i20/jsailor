@@ -1,0 +1,134 @@
+<h3><span class="keyword">Variant</span> S.Fn.prop(<span class="keyword">String</span> prop)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie la valeur de la propriété <pre>prop</pre> du premier élément de la collection.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">alert</span>( S(<span class="string">'p'</span>).prop(<span class="string">'nodeName'</span>) );
+            <span class="comment">//affiche un alert contenant 'P'</span>
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor</span> S.Fn.prop(<span class="keyword">String</span> prop, <span class="keyword">Variant</span> value)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique la valeur <pre>value</pre> à la propriété <pre>prop</pre> de chaque élément de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Ne fonctionne que pour les propriétés accessibles en écriture.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).prop(<span class="string">'innerHTML'</span>, <span class="string">'Nouveau contenu!'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<h3><span class="keyword">JSailor</span> S.Fn.prop(<span class="keyword">Object</span> props)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique les valeurs correspondantes aux propriétés de <pre>props</pre> aux propriétés de chaque élément de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>props</pre> est composé des couples <pre>nom_prop: valeur_prop</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).prop({
+
+                <span class="string">'innerHTML'</span>: <span class="string">'Nouveau contenu!'</span>,
+                <span class="string">'...'</span>: <span class="string">'...'</span>
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

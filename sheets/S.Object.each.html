@@ -1,0 +1,77 @@
+<h3><span class="keyword">Void</span> S.Object.each(<span class="keyword">Object</span> base, <span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique <pre>fn</pre> à chaque propriété de <pre>base</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>L'utilisation du mot clé <pre class="keyword">this</pre> dans le corps de fonction fait référence à la valeur de la propriété(ou item) sur laquelle est appliquée <pre>fn</pre>.</li>
+        <li><pre>fn</pre> prend 2 paramètres de cette manière, <pre>fn(<span class="keyword">String</span>+<span class="keyword">Number</span> i, <span class="keyword">Variant</span> valeur)</pre>: <pre>i</pre> est la clé(ou item) sur laquelle est appliquée <pre>fn</pre>; <pre>valeur</pre> est la valeur de la propriété(ou item)(idem <pre class="keyword">this</pre>).</li>
+        <li>Si la clé est numérique dans l'objet alors <pre>i</pre> sera un nombre sinon une chaine.</li>
+        <li>Si <pre>base</pre> est un array alors <pre>i</pre> sera toujours un nombre.</li>
+        <li><pre>fn</pre> peut renvoyer le booléen <pre class="keyword">false</pre> qui équivaut au mot clé <pre class="keyword">break</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre>S.Object.each({
+
+    prop1: <span class="string">'un'</span>,
+    prop2: <span class="number">2</span>,
+    prop3: <span class="string">'3'</span>,
+    <span class="number">4</span>: <span class="string">'quatre'</span>
+
+}, <span class="keyword">function</span>(){
+
+    <span class="keyword">alert</span>(<span class="keyword">this</span>);
+});
+<span class="comment">/*affiche 4 alert à la suite de cette façon:
+
+alert('un');
+alert(2);
+alert('3');
+alert('quatre');*/</span></pre></li>
+
+<li class="script"><pre>S.Object.each({
+
+    prop1: <span class="string">'un'</span>,
+    prop2: <span class="number">2</span>,
+    prop3: <span class="string">'3'</span>,
+    <span class="number">4</span>: <span class="string">'quatre'</span>
+
+}, <span class="keyword">function</span>(i, value){
+
+    <span class="comment">//value est identique à this</span>
+    <span class="keyword">alert</span>(i + <span class="string">': '</span> + value);
+});
+<span class="comment">/*affiche 4 alert à la suite de cette façon:
+alert('prop1: un');
+alert('prop2: 2');
+alert('prop2: 3');
+alert('4: quatre');*/</span></pre></li>
+
+<li class="script"><pre>S.Object.each({
+
+    prop1: <span class="string">'un'</span>,
+    prop2: <span class="number">2</span>,
+    prop3: <span class="string">'3'</span>,
+    <span class="number">4</span>: <span class="string">'quatre'</span>
+
+}, <span class="keyword">function</span>(i, value){
+
+    <span class="comment">//on casse la boucle en arrivant à la propriéte prop3</span>
+    <span class="keyword">if</span>(i === <span class="string">'prop3'</span>){ <span class="keyword">return false</span>; }
+
+    <span class="keyword">alert</span>(i + <span class="string">': '</span> + value);
+});
+<span style="color: green;">/*affiche 2 alert à la suite de cette façon:
+alert('prop1: un');
+alert('prop2: 2');*/</span></pre></li>
+
+    </ul>
+</p>

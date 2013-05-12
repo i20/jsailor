@@ -1,0 +1,37 @@
+<h3><span class="keyword">Void</span> S.Cookie.set(<span class="keyword">String</span> nom, <span class="keyword">Variant</span> valeur[, <span class="keyword">Object</span> options])</h3>
+
+<p>Description:
+    <ul>
+        <li>Crée un cookie <pre>nom</pre> valant <pre>valeur</pre> et ayant les caractèristiques <pre>options</pre> sur l'ordinateur de l'internaute.</li>
+    </ul>
+</p>
+
+<p>Remarque:
+    <ul>
+        <li><pre>options</pre> peut contenir 4 propriétés:
+            <ul>
+                <li><pre>expire</pre>: délai d'expiration du cookie en millisecondes(par défaut dès que le navigateur est quitté)</li>
+                <li><pre>path</pre>: chemin d'accessibilité du cookie(par défaut l'url qui l'a créé)</li>
+                <li><pre>secure</pre>: booléen, si mis à <pre class="keyword">true</pre>, le cookie ne sera envoyé que si le protocole de connexion est sécurisé(SSL etc…).</li>
+                <li><pre>domain</pre>: nom de domaine(par défaut le serveur sur lequel se trouve la page)</li>
+            </ul>
+        </li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script">S.Cookie.set(<span class="string">'user_id'</span>, <span class="string">'234'</span>);
+<span class="comment">//Le cookie user_id a été crée sur l'ordinateur et vaut '234'</span></pre>
+        </li>
+
+        <li>
+<pre class="script">S.Cookie.set(<span class="string">'user_id'</span>, <span class="string">'234'</span>, { path: <span class="string">'/'</span> });
+<span class="comment">//Le cookie user_id a été crée sur l'ordinateur et vaut '234'
+//Il est accessible partout dans l'arborescence du domaine</span></pre>
+        </li>
+
+    </ul>
+</p>

@@ -1,0 +1,51 @@
+<h3><span class="keyword">Void</span> S.Ajax.get(<span class="keyword">String</span> url[, <span class="keyword">Object</span> params][, <span class="keyword">Function</span> callback])</h3>
+
+<p>Description:
+    <ul>
+
+        <li>Effectue une requête HTTP sur l'URL <pre>url</pre> en utilisant la méthode <span class="string">'GET'</span>, les données fournies dans <pre>params</pre> et appelle <pre>callback</pre> sur le résultat de la requête en cas de succès.</li>
+
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+
+        <li><pre>params</pre> est optionnel.</li>
+        <li>Il s'agit d'un raccourci qui est identique à:
+<pre class="script">S.Ajax.request({
+
+    url: url,
+    method: <span class="string">'GET'</span>,
+    success: callback
+    <span class="comment">//si params est fourni, ses propriétés seront ajoutées à la liste</span>
+});</pre>
+        </li>
+
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="comment">//considérons d'abord un fichier 'data.json' contenant:</span>
+
+{
+    <span class="string">"prop1"</span>: <span class="string">"val1"</span>,
+    <span class="string">"prop2"</span>: <span class="string">"val2"</span>
+}
+
+<span class="comment">//considérons maintenant un autre fichier 'get.html' placé dans le même répertoire que 'data.json',
+//avec le script suivant:</span>
+
+S.Ajax.get(<span class="string">'data.json'</span>, { response: <span class="string">'auto'</span> }, <span class="keyword">function</span>(json){
+
+    <span class="keyword">alert</span>(json.prop1);
+});
+
+<span class="comment">//le code ci-dessus affiche un alert contenant 'val1'</span></pre>
+        </li>
+
+    </ul>
+</p>

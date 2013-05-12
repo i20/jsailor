@@ -1,0 +1,13 @@
+<h3><span class="keyword">Boolean</span> S.Test.isJSailor(<span class="keyword">Variant</span> valeur)</h3>
+
+<p>Description:<ul>
+    <li>Renvoie <pre class="keyword">true</pre> si <pre>valeur</pre> est un objet JSailor, <pre class="keyword">false</pre> sinon.</li>
+</ul></p>
+
+<p>Exemples:<ul>
+<li class="script"><pre><span class="keyword">var</span> valeur = S(<span class="string">'#foo'</span>);
+<span class="keyword">alert</span>(S.Test.isJSailor(valeur) ? <span class="string">'objet JSailor'</span> : <span class="string">'autre type'</span>);
+<span class="comment">//affiche un alert contenant 'objet JSailor'</span></pre></li>
+<li class="script"><pre><span class="keyword">var</span> valeur = <span class="keyword">document</span>;
+<span class="keyword">alert</span>(S.Test.isJSailor(valeur) ? <span class="string">'objet JSailor'</span> : <span class="string">'autre type'</span>);
+<span class="comment">//affiche un alert contenant 'autre type'</span></pre></li></ul></p>

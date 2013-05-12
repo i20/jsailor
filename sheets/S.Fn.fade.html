@@ -1,0 +1,42 @@
+<h3><span class="keyword">JSailor</span> S.Fn.fade(<span class="keyword">Number</span>+<span class="keyword">String</span> opac, <span class="keyword">Number</span> delay, <span class="keyword">Function</span> callback)</h3>
+
+<p>Description:
+    <ul>
+        <li>Raccourci pour <pre>S.Fn.tune({ opacity: opac }, delay, callback)</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'button'</span>).click(<span class="keyword">function</span>(){
+
+                S(<span class="string">'p'</span>).fade(<span class="number">0.3</span>, <span class="number">1000</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;style <span class="attribut">type</span>=<span class="string">"text/css"</span>&gt;</span>
+        p
+        <span class="php">{
+            background-color<span class="var">: blue</span>;
+        }</span>
+        <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;button&gt;</span>Déclenchez l'effet!<span class="tag">&lt;/button&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

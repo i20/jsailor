@@ -1,0 +1,6 @@
+{
+	"survol": ["S.Fn.hover"],
+	"effet animation": ["S.Fn.hover", "S.Fn.tune", "S.Fn.finish", "S.Fn.fade", "S.Fn.uniLoad", "S.Fn.lazyLoad"],
+	"image chargement": ["S.Fn.uniLoad", "S.Fn.lazyLoad"],
+	"manipulation dom": ["S.Fn.append", "S.Fn.prepend", "S.Fn.remove", "S.Fn.wrap", "S.Fn.follow", "S.Fn.precede", "S.Fn.html"]
+}

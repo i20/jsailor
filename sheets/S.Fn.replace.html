@@ -1,0 +1,128 @@
+<h3><span class="keyword">JSailor</span> S.Fn.replace(<span class="keyword">String</span> html)</h3>
+
+<p>Description:
+    <ul>
+        <li>Remplace chaque élément de la sélection par le modèle <pre>html</pre> et sélectionne les nouveaux éléments.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Si <pre>insert</pre> est un élément HTML ou un objet JSailor, donc comporte des références sur des éléments déjà existants dans le <pre class="keyword">document</pre> alors ces derniers seront déplacés et non clonés lors de l'application sur le premier élément de la collection. Les applications suivantes seront faites à partir de clones de <pre>insert</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor.1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'b'</span>).replace(<span class="string">'&lt;i&gt;J'étais une balise "b".&lt;/i&gt;'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;b&gt;</span>Je suis une balise "b".<span class="tag">&lt;/b&gt;</span>
+        <span class="tag">&lt;b&gt;</span>Moi aussi.<span class="tag">&lt;/b&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+<h3><span class="keyword">JSailor</span> S.Fn.replace(<span class="keyword">JSailor</span> insert)</h3>
+
+<p>Description:
+    <ul>
+        <li>Entoure chaque éléments de la sélection avec les éléments de la collection de <pre>insert</pre> et renvoie un objet JSailor basé sur les éléments entourants.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>insert</pre> comportant des références sur des éléments déjà existants dans <pre class="keyword">document</pre> alors ces derniers seront déplacés et non clonés lors de l'application sur le premier élément de la sélection. Les applications suivantes seront faites à partir de clones de <pre>insert</pre>.</li>
+        <li>Là aussi, les éléments de la sélection seront toujours insérés dans le premier élément de <pre>insert</pre> et le plus loin possible dans l'arborescence de ce dernier.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor.1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'b'</span>).replace( S(<span class="string">'i'</span>) );
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;b&gt;</span>Je suis une balise "b".<span class="tag">&lt;/b&gt;</span>
+        <span class="tag">&lt;i&gt;</span>Je suis une balise "i".<span class="tag">&lt;/i&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+<h3><span class="keyword">JSailor</span> S.Fn.replace(<span class="keyword">Element</span> elt)</h3>
+
+<p>Description:
+    <ul>
+        <li>Entoure chaque éléments de la sélection avec un élément identique à <pre>elt</pre> et renvoie un objet JSailor basé <pre>insert</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Si <pre>insert</pre> est un élément HTML ou un objet JSailor, donc comporte des références sur des éléments déjà existants dans <pre class="keyword">document</pre> alors ces derniers seront déplacés et non clonés lors de l'application sur le premier élément de la sélection. Les applications suivantes seront faites à partir de clones de <pre>insert</pre>.</li>
+        <li>Les éléments de la sélection seront toujours insérés dans le premier élément de <pre>insert</pre> et le plus loin possible dans l'arborescence de ce dernier.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor.1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).replace(<span class="string">'&lt;i&gt;&lt;/i&gt;'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;span&gt;</span>Je suis le premier span.<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

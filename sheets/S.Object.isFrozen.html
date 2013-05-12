@@ -1,0 +1,30 @@
+<h3><span class="keyword">Boolean</span> S.Object.isFrozen(<span class="keyword">Object</span> obj)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie <pre class="keyword">true</pre> si <pre>obj</pre> est non extensible et qu'aucune de ses propriétés ne peut être supprimée ni réécrite(read-only).</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>En construction, ne pas utiliser !</li>
+        <li>Tous les objets définis par l'utilisateur sont par défaut extensibles.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+    
+<li class="script"><pre><span class="keyword">var</span> obj = {};
+
+<span class="keyword">alert</span>( S.Object.isFrozen(obj) ? <span class="string">'gelé'</span> : <span class="string">'non gelé'</span> );
+<span class="comment">//affiche un alert contenant 'non gelé'</span>
+</pre></li>
+
+<li class="script"><pre><span class="keyword">alert</span>( S.Object.isFrozen(ActiveXObject) ? <span class="string">'gelé'</span> : <span class="string">'non gelé'</span> );
+<span class="comment">//affiche un alert contenant 'gelé'(dans le cas où ActiveXObject existe)</span>
+</pre></li>
+
+    </ul>
+</p>

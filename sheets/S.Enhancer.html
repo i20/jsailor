@@ -1,0 +1,25 @@
+<h3><span class="keyword">Object</span> S.Enhancer</h3>
+
+<p>Sous objet de la librairie permettant la configuration des extensions HTML. Les extensions HTML sont des scripts ajoutant des comportements spécifiques aux éléments HTML de base.</p>
+
+<p>Remarques:
+    <ul>
+        <li>Ces scripts sont lancés de manière asynchrone (non bloquante) dès que le document est manipulable.</li>
+        <li>Lorsque toutes les extensions activées ont été appliquées, un événement JSailorDOMExtended est déclenché.</li>
+        <li>Par défaut toutes les extensions sont désactivées.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script">S.Enhancer.xxx.on = <span class="keyword">true</span>;
+<span class="comment">//active l'extension xxx</span>
+
+S.Enhancer.xxx.on = <span class="keyword">false</span>;
+<span class="comment">//désactive l'extension xxx</span></pre>
+        </li>
+
+    </ul>
+</p>

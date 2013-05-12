@@ -1,0 +1,13 @@
+<h3><span class="keyword">JSailor</span> S.Fn.live(<span class="keyword">Function</span> fn)</h3>
+
+<p>Description:<ul>
+    <li>Raccourci pour <pre>S.Fn.bind(<span class="string">'live'</span>, fn)</pre>(cf <a href="javascript:display('S.Fn.bind');">S.Fn.bind</a>).</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li><span class="string">'live'</span> fait partie des événements particuliers à JSailor avec <span class="string">'die'</span> (cf <a href="javascript:display('S.Fn.die');">S.Fn.die</a>).</li>
+    <li>Il est impossible de déclencher artificiellement cet événement avec <pre>fire()</pre>.</li>
+    <li>L'événement correspond au rajout d'un élément HTML, correspondant à l'expression du sélecteur, dans <pre class="keyword">document</pre>.</li>
+    <li>Ne fonctionne que si l'on a utilisé une expression pour sélectionner les éléments.</li>
+    <li>Dans le cas où le navigateur utilisé est, soit Internet Explorer, soit Opera, alors cette méthode ne fonctionne que si la modification du document a été faite à l'aide des méthodes JSailor de modification du DOM(<pre>attr()</pre>, <pre>css()</pre>, <pre>prop()</pre>, <pre>append()</pre> etc…).</li>
+</ul></p>

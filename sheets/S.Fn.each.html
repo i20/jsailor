@@ -1,0 +1,50 @@
+<h3><span class="keyword">JSailor</span> S.Fn.each(<span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Applique <pre>fn</pre> à tous les éléments de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Fonctionne identiquement à <a href="javascript:display('S.Object.each');">S.Object.each</a> appliquée sur la collection.</li>
+        <li>Dans <pre>fn</pre>, <pre class="keyword">this</pre> fait référence à l'élément courant.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).each(<span class="keyword">function</span>(){
+
+                <span class="keyword">var</span> old_html = S(<span class="keyword">this</span>).html();
+
+                S(<span class="keyword">this</span>).html(<span class="string">'Je suis le '</span> + old_html + <span class="string">' paragraphe de cette page!'</span>);
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>premier<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>second<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>troisième<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

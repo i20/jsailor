@@ -1,0 +1,45 @@
+<h3><span class="keyword">Boolean</span> S.Filter.css(<span class="keyword">String</span> styles)</h3>
+
+<p>Description:
+    <ul>
+        <li>Teste si l'élément courant a les style défini par <pre>styles</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Pour tester plusieurs attributs de styles, il suffit de séparer chaque bloc nom/valeur par une virgule.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+        
+        <li>
+<pre class="script">
+<span class="php">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.5.min.js&quot;</span>&gt;</span><span class="tag">&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">':css(display=inline,color=red)'</span>).each(<span class="keyword">function</span>(){
+            
+                <span class="keyword">alert</span>(S(<span class="keyword">this</span>) + <span class="string">' contenant: '</span> + S(<span class="keyword">this</span>).html());
+            });
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+</pre>
+
+<a href="tests/S...html" target="_blank">Tester ce code!</a>
+        </li>   
+             
+    </ul>
+</p>

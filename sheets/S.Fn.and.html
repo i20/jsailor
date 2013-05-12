@@ -1,0 +1,44 @@
+<h3><span class="keyword">JSailor</span> S.Fn.and(<span class="keyword">JSailor</span>+<span class="keyword">Multi</span> expr)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie un objet JSailor basé sur la collection contenant les éléments présents à la fois dans <pre>expr</pre> et dans la collection initiale.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Cette méthode correspond à l'intersection logique d'un ensemble avec un autre(A∩B).</li>
+        <li>Cette méthode appartient à la même catégorie que <pre>not()</pre>, <pre>or()</pre>, <pre>xor()</pre>, <pre>within()</pre> et <pre>co()</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'p'</span>).and(<span class="string">'.foo'</span>).css(<span class="string">'color'</span>, <span class="string">'red'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe de cette page.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attribut">class</span>=<span class="string">&quot;foo&quot;</span><span class="tag">&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;span</span> <span class="attribut">class</span>=<span class="string">&quot;foo&quot;</span><span class="tag">&gt;</span>Je suis le premier span.<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;span&gt;</span>Je suis le second span.<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

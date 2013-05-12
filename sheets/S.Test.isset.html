@@ -1,0 +1,20 @@
+<h3><span class="keyword">Boolean</span> S.Test.isset(<span class="keyword">Variant</span> valeur)</h3>
+
+<p>Description:<ul>
+    <li>Renvoie <pre class="keyword">true</pre> si <pre>valeur</pre> contient quelque chose, <pre class="keyword">false</pre> sinon.</li>
+</ul></p>
+
+<p>Remarques:<ul>
+    <li>Si valeur contient <pre>null</pre> la méthode renvoie <pre class="keyword">true</pre>.</li>
+</ul></p>
+
+<p>Exemples:<ul>
+<li class="script"><pre><span class="keyword">var</span> valeur = <span class="string">'something'</span>;
+<span class="keyword">alert</span>(S.Test.isset(valeur) ? <span class="string">'utilisée'</span> : <span class="string">'vide'</span>);
+<span class="comment">//affiche un alert contenant 'utilisée'</span></pre></li>
+<li class="script"><pre><span class="keyword">var</span> valeur = null;
+<span class="keyword">alert</span>(S.Test.isset(valeur) ? <span class="string">'utilisée'</span> : <span class="string">'vide'</span>);
+<span class="comment">//affiche un alert contenant 'utilisée'</span></pre></li>
+<li class="script"><pre><span class="keyword">var</span> valeur;
+<span class="keyword">alert</span>(S.Test.isset(valeur) ? <span class="string">'utilisée'</span> : <span class="string">'vide'</span>);
+<span class="comment">//affiche un alert contenant 'vide'</span></pre></li></ul></p>

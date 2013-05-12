@@ -1,0 +1,56 @@
+<h3><span class="keyword">Void</span> S.Event.bind(<span class="keyword">Element</span> elt, <span class="keyword">String</span> type, <span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Attache le gestionnaire d'événement <pre>ontype = fn</pre> à <pre>elt</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>type</pre> correspond au type d'événement non préfixé par <span class="string">'on'</span>.</li>
+        <li>Les anciens gestionnaires d'événement du même type attachés à <pre>elt</pre> ne seront pas écrasés.</li>
+        <li><pre>fn</pre> prend en paramètre l'objet événement.</li>
+        <li><pre>fn</pre> peut retourner un booléen: <pre class="keyword">false</pre>, bloque l'action par défaut de l'événement(idem <pre>event.preventDefault()</pre>); <pre class="keyword">true</pre>, stoppe la propagation de l'événement(idem <pre>event.stopPropagation()</pre>).</li>
+        <li><pre>fn</pre> peut retourner un booléen: <pre class="keyword">false</pre>, bloque l'action par défaut de l'événement(idem <pre>event.preventDefault()</pre>); <pre class="keyword">true</pre>, stoppe la propagation de l'événement(idem <pre>event.stopPropagation()</pre>).</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">var</span> paras = <span class="keyword">document</span>.getElementsByTagName(<span class="string">'p'</span>);
+
+            S.Event.bind(paras[<span class="number">0</span>], <span class="string">'click'</span>, <span class="keyword">function</span>(){
+
+                <span class="keyword">alert</span>( <span class="keyword">this</span>.innerHTML );
+            });
+
+            S.Event.bind(paras[<span class="number">1</span>], <span class="string">'mouseover'</span>, <span class="keyword">function</span>(event){
+
+                <span class="keyword">alert</span>( event.<span class="keyword">pageX</span> );
+            });
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Cliquez sur moi!<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Passez la souris sur moi!<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

@@ -1,0 +1,72 @@
+<h3><span class="keyword">Object</span> S.Object.extend(<span class="keyword">Object</span> base, <span class="keyword">Object</span> rajout)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie <pre>base</pre> étendu avec les propriétés de <pre>rajout</pre>.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Les propriétés de <pre>rajout</pre> déjà présentes dans <pre>base</pre> seront réécrites.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+<li class="script"><pre><span class="keyword">var</span> test1 = S.Object.extend({
+
+    prop1: <span class="string">'un'</span>,
+    prop2: <span class="string">'2'</span>,
+    prop4: <span class="number">4</span>
+
+}, {
+
+    prop3: <span class="number">3</span>,
+    prop5: <span class="keyword">function</span>(arg){
+
+        <span class="keyword"> alert</span>(arg);
+    }
+});
+
+<span class="comment">/*test1 = {
+
+    prop1: 'un',
+    prop2: '2',
+    prop3: 3,
+    prop4: 4,
+    prop5: function(arg){
+
+        alert(arg);
+    }
+}*/</span></pre></li>
+
+<li class="script"><pre><span class="keyword">var</span> test2 = S.Object.extend({
+
+    prop1: <span class="string">'un'</span>,
+    prop2: <span class="string">'2'</span>
+
+}, {
+
+    prop3: <span class="number">3</span>,
+    prop2: <span class="keyword">function</span>(arg){
+
+        <span class="keyword">alert</span>(arg);
+    }
+});
+
+<span class="comment">//prop2 a été réécrite
+/*test2 = {
+
+    prop1: 'un',
+    prop2: function(arg){
+
+        alert(arg);
+    },
+    prop3: 3
+
+}*/</span></pre></li>
+
+    </ul>
+</p>

@@ -1,0 +1,90 @@
+<h2>Toutes les expressions de sélections de JSailor</h2>
+
+<hr/>
+
+<h3>Expressions de base</h3>
+
+<p>Ce sont toutes les expressions dont la première opérande est implicitement passée à <span class="string">'*'</span> si elle n'est pas fournie. On peut donc tout aussi bien écrire <pre>S(<span class="string">'.foo'</span>)</pre> à la place de <pre>S(<span class="string">'*.foo'</span>)</pre>. Si vous ne souhaitez effectuer le tri que sur certains éléments, il vous suffit de placer la première opérande avant l'expression de base tel que <pre>S(<span class="string">'p.foo'</span>)</pre>:
+    <ul>
+        <li><span class="string">'*'</span>: sélectionne tous éléments du document.</li>
+        <li><span class="string">'#foo'</span>: sélectionne les éléments dont l'attribut ID vaut <span class="string">'foo'</span>.</li>
+        <li><span class="string">'.foo'</span>: sélectionne les éléments dont l'attribut CLASS vaut <span class="string">'foo'</span>.</li>
+        <li><span class="string">'@foo'</span>: sélectionne les éléments dont l'attribut NAME vaut <span class="string">'foo'</span>.</li>
+        <li><span class="string">'foo'</span>: sélectionne les éléments du type <span class="string">'foo'</span>.</li>
+        <li><span class="string">'[foo]'</span>: sélectionne tous éléments portant l'attribut FOO.</li>
+        <li><span class="string">'[foo=bar]'</span>: sélectionne tous éléments dont l'attribut FOO vaut <span class="string">'bar'</span>.</li>
+        <li><span class="string">'[foo^=bar]'</span>: sélectionne tous éléments dont l'attribut FOO commence par <span class="string">'bar'</span>.</li>
+        <li><span class="string">'[foo$=bar]'</span>: sélectionne tous éléments dont l'attribut FOO finit <span class="string">'bar'</span>.</li>
+        <li><span class="string">'[foo*=bar]'</span>: sélectionne tous éléments dont l'attribut FOO contient <span class="string">'bar'</span>.</li>
+        <li><span class="string">'[foo~=bar]'</span>: sélectionne tous éléments dont l'attribut FOO est une liste de valeurs séparées par des espaces et qui contient <span class="string">'bar'</span>.</li>
+        <li><span class="string">'[foo|=bar]'</span>: sélectionne tous éléments dont l'attribut FOO est une liste de valeurs séparées par des tirets et qui contient <span class="string">'bar'</span>.</li>
+        <li><span class="string">'[foo!=bar]'</span>: sélectionne tous éléments dont l'attribut FOO ne vaut pas <span class="string">'bar'</span>.</li>
+        <li><span class="string">':pseudo-classe'</span>: sélectionne tous éléments du document qui satisfont au prédicat associé à <span class="string">'pseudo-classe'</span> par S.Fn.filter(cf <a href="javascript:display('Filters')">filtres prédéterminés</a>).</li>
+        <li><span class="string">':pseudo-classe(...)'</span>: sélectionne tous éléments du document qui satisfont au prédicat associé à <span class="string">'pseudo-classe'</span> par S.Fn.filter(cf <a href="javascript:display('Pseudos')">filtres prédéterminés</a>).</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Lorsque vous souhaitez sélectionner des éléments du <pre class="keyword">document</pre> HTML, il faut tout d'abord faire attention à ce que ce dernier soit fini de charger, d'où l'utilité de l'écriture <pre>S(<span class="keyword">function</span>(){ <span class="comment">/*code de sélection*/</span> })</pre></li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+        <li>
+<pre class="script">S(<span class="keyword">function</span>(){
+
+    <span class="keyword">var</span> divs = S(<span class="string">'div'</span>);
+});</pre>
+        </li>
+    </ul>
+</p>
+
+<hr/>
+
+<h3>Expressions logiques</h3>
+
+<p>
+    <ul>
+        <li><span class="string">'expr1 | expr2'</span>: écriture raccourcie pour <pre>S(<span class="string">'expr1'</span>).or(<span class="string">'expr2'</span>)</pre>(cf <a href="javascript:display('S.Fn.or');">S.Fn.or</a>).</li>
+        <li><span class="string">'expr1 & expr2'</span>: écriture raccourcie pour <pre>S(<span class="string">'expr1'</span>).and(<span class="string">'expr2'</span>)</pre>(cf <a href="javascript:display('S.Fn.and');">S.Fn.and</a>).</li>
+        <li><span class="string">'expr1 ! expr2'</span>: écriture raccourcie pour <pre>S(<span class="string">'expr1'</span>).not(<span class="string">'expr2'</span>)</pre>(cf <a href="javascript:display('S.Fn.not');">S.Fn.not</a>).</li>
+        <li><span class="string">'expr1 ^ expr2'</span>: écriture raccourcie pour <pre>S(<span class="string">'expr1'</span>).xor(<span class="string">'expr2'</span>)</pre>(cf <a href="javascript:display('S.Fn.xor');">S.Fn.xor</a>).</li>
+    </ul>
+</p>
+
+<hr/>
+
+<h3>Généalogie CSS3</h3>
+
+<p>
+    <ul>
+        <li><span class="string">'expr1 > expr2'</span>: descendance directe, sélectionne les éléments correspondants à <span class="string">'expr2'</span> enfants d'un élément correspondant à <span class="string">'expr1'</span>.</li>
+        <li><span class="string">'expr1 &nbsp;&nbsp; expr2'</span>: descendance indirecte, sélectionne les éléments correspondants à <span class="string">'expr2'</span> descendants d'un élément correspondant à <span class="string">'expr1'</span>.</li>
+        <li><span class="string">'expr1 + expr2'</span>: adjacence directe, sélectionne les éléments correspondants à <span class="string">'expr2'</span> précédés directement par un élément correspondant à <span class="string">'expr1'</span>.</li>
+        <li><span class="string">'expr1 ~ expr2'</span>: adjacence indirecte, sélectionne les éléments correspondants à <span class="string">'expr2'</span> précédés directement ou indirectement par un élément correspondant à <span class="string">'expr1'</span>.</li>
+    </ul>
+</p>
+
+<hr/>
+
+<h3>Règles de priorité</h3>
+
+<p>Pour les expressions complexes composées de plusieures expressions des catégories ci-dessus, il vous est possible d'appliquer des règles de priorité dans l'évaluation en encapsulant(mettre entre parenthèses) les expressions qui doivent être évaluées en premier.</p>
+
+<p>Exemple:
+    <ul>
+        <li>
+<pre class="script"><span class="keyword">var</span> collec1 = S(<span class="string">'ul|p:odd'</span>),
+    collec2 = S(<span class="string">'(ul|p):odd'</span>);
+<span class="comment">//collec1 et collec2 ne sont pas équivalentes</span></pre>
+        </li>
+    </ul>
+</p>
+
+<hr/>
+
+<h3>Remarque importante</h3>
+
+<p>Les expressions de sélection doivent être écrites sans aucun espace(ou un seul pour l'expression de descendance indirecte décrite plus haut).</p>

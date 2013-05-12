@@ -1,0 +1,28 @@
+<h3><span class="keyword">XMLHttpRequest</span> S.Ajax.xhr()</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie une nouvelle instance de l'objet dédié aux requêtes AJAX, adapté au navigateur.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Dans le cas où le navigateur supporte à la fois <pre>XMLHttpRequest</pre> et <pre>ActiveXObject</pre>, ce dernier sera préféré car l'implémentation du premier pour les navigateurs Microsoft est incomplète et interdit les requêtes locales.</li>
+        <li>Pour de plus amples informations sur l'utilisation de l'objet XMLHttpRequest, consultez une documentation JavaScript.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="keyword">var</span> xhr = S.Ajax.xhr();
+
+<span class="comment">//xhr.open(…
+//xhr.send(…
+//...</span></pre>
+        </li>
+
+    </ul>
+</p>

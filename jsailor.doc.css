@@ -1,0 +1,87 @@
+.comment
+{
+	color: green;
+	font-style: italic;
+}
+.keyword
+{
+	color: #E27A25;
+	font-style: bold;
+}
+.string
+{ color: red; }
+.number
+{ color: #194BA2; }
+.tag
+{ color: #1D37F0; }
+.attribut
+{ color: #91904C; }
+.var
+{ color: #CC2EC2; }
+.php
+{ color: #868686; }
+.script
+{
+	display: block;
+	border: 1px solid black;
+	padding: 15px;
+	margin-bottom: 10px;
+	background-color: #DEE4EA;
+}
+.sample
+{
+	border: 1px solid red;
+	padding: 15px;
+	margin-bottom: 10px;
+	background-color: #FFFFFF;
+}
+.hilite, a
+{ color: #E83A1D; }
+.off
+{ color: #471C0E; }
+.on
+{ color: red; }
+#header
+{
+	border: 1px solid black;
+	background-color: #FFFFFF;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#header .u
+{ color: orange; }
+#header i
+{ font-size: 24px; }
+#menu
+{
+	float: left;
+	width: 300px;
+}
+#menu > div
+{
+	border: 1px solid black;
+	padding-left: 15px;
+	background-color: #FFFFFF;
+	margin-bottom: 20px;
+}
+#paypal
+{ text-align: center; }
+#research
+{ padding: 15px; }
+#arbre span
+{ cursor: pointer; }
+#corps
+{
+	margin-left: 325px;
+	border: 1px solid black;
+	padding-left: 15px;
+	padding-right: 15px;
+	background-color: #FFFFFF;
+}
+pre
+{ display: inline; }
+body
+{
+    //background-color: #EC8921;
+    background-image: url("images/pict-06.png");
+}

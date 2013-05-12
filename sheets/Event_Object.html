@@ -1,0 +1,63 @@
+<h3>Objet événement(Event object)</h3>
+
+<p>Il s'agit d'un objet littéral JavasScript avec des propriétés particulières qui permettent de caractèriser un événement(click, mouseover etc…) avec des informations telles que la position de la souris, la touche appuyée etc… Il trouve toute son utilité dans le cas où l'événement a été déclenché artificiellement. Par exemple l'événement click déclenché au survol d'un lien, ce dernier n'étant pas issu d'un véritable clic, l'événement n'est pas renseigné sur le numéro du bouton qui aurait effectué le clic mais via l'objet événement vous pouvez lui donner l'information tout de même.</p>
+
+<p>L'objet événement comprend un grand nombre de propriétés possibles en fonction du type d'événement déclenché, en voici une liste exhaustive avec leur signification et valeurs possibles:
+    <ul>
+        <li><span class="hilite">Propriétés générales</span>:
+            <ul>
+                <li><span class="keyword">String</span> <pre>type</pre>: type de l'événement non préfixé par <span class="string">'on'</span>.</li>
+                <li><span class="keyword">Element</span> <pre>target</pre>: élément responsable du déclenchement de l'événement.</li>
+                <li><span class="keyword">Element</span> <pre>srcElement</pre>: Idem <pre>target</pre>. Uniquement pour IE.</li>
+                <li><span class="keyword">Element</span> <pre>currentTarget</pre>: élément atteint par l'événement à un instant donné. Non compatible IE.</li>
+                <li><span class="keyword">Boolean</span> <pre>bubbles</pre>: <pre class="keyword">true</pre> si l'événement peut bouillonner. Non compatible IE.</li>
+                <li><span class="keyword">Boolean</span> <pre>cancelable</pre>: <pre class="keyword">true</pre> si l'événement peut être supprimé. Non compatible IE.</li>
+                <li><span class="keyword">Function</span> <pre>stopPropagation</pre>: stoppe la propagation de l'événement.</li>
+                <li><span class="keyword">Boolean</span> <pre>cancelBubble</pre>: <pre class="keyword">true</pre> = <pre>stopPropagation()</pre>. IE uniquement.</li>
+                <li><span class="keyword">Function</span> <pre>preventDefault</pre>: empêche l'action par défaut d'être effectuée.</li>
+                <li><span class="keyword">Boolean</span> <pre>returnValue</pre>: <pre class="keyword">false</pre> = <pre>preventDefault()</pre>. IE uniquement.</li>
+                <li><span class="keyword">Number</span> <pre>eventPhase</pre>: la phase de l'événement en cours. <span class="number">1</span> = phase de capture, <span class="number">2</span> = phase de bouillonnement sur la cible(bubbling), <span class="number">3</span> = bouillonnement sur les ancêtres de la cible, <span class="number">0</span> = événement créé artificiellement et pas encore déclenché. Non compatible IE.</li>
+            </ul>
+        </li>
+        <br/>
+        <li><span class="hilite">Propriétés relatives aux événements de type Key Events(événements liés aux touches du clavier)</span>:
+            <ul>
+                <li><span class="keyword">Boolean</span> <pre>shiftKey</pre>: <pre class="keyword">true</pre> si la touche <span class="string">"shift"</span> a été pressée, <pre class="keyword">false</pre> sinon.</li>
+                <li><span class="keyword">Boolean</span> <pre>ctrlKey</pre>: <pre class="keyword">true</pre> si la touche <span class="string">"ctrl"</span> a été pressée, <pre class="keyword">false</pre> sinon.</li>
+                <li><span class="keyword">Boolean</span> <pre>altKey</pre>: <pre class="keyword">true</pre> si la touche <span class="string">"alt"</span> a été pressée, <pre class="keyword">false</pre> sinon.</li>
+                <li><span class="keyword">Boolean</span> <pre>metaKey</pre>: <pre class="keyword">true</pre> si la touche <span class="string">"Windows"</span> ou <span class="string">"Apple"</span> a été pressée, <pre class="keyword">false</pre> sinon.</li>
+                <li><span class="keyword">Number</span> <pre>modifiers</pre>: remplace les 3 propriétés précédentes pour les navigateurs ne les supportant pas. <span class="number">1</span> = <span class="string">"alt"</span>, <span class="number">2</span> = <span class="string">"ctrl"</span>, <span class="number">4</span> = <span class="string">"shift"</span>, <span class="number">8</span> = <span class="string">"cmd"</span>(Mac).</li>
+                <li><span class="keyword">Number</span> <pre>keyCode</pre>: correspond au numéro de la touche pressée.</li>
+                <li><span class="keyword">Number</span> <pre>which</pre>: correspond au numéro de la touche pressée pour les navigateurs ne supportant pas <pre>keyCode</pre>.</li>
+                <li><span class="keyword">Number</span> <pre>charCode</pre>: valeur du caractère unicode associé à la touche. Valable uniquement pour Mozilla.</li>
+            </ul>
+        </li>
+        <br/>
+        <li><span class="hilite">Propriétés relatives aux événements de type Mutation Events(événements liés aux modification du document)</span>:
+            <ul>
+                <li><span class="keyword">Number</span> <pre>attrChange</pre>: type de changement pour l'événement <span class="string">'DOMAttrModified'</span>. <span class="number">1</span> = modification, <span class="number">2</span> = addition, <span class="number">3</span> = suppression. Non compatible IE.</li>
+                <li><span class="keyword">String</span> <pre>attrName</pre>: nom de l'attribut pour l'événement <span class="string">'DOMAttrModified'</span>. Non compatible IE.</li>
+                <li><span class="keyword">String</span> <pre>newValue</pre>: nouvelle valeur de <pre>nodeValue</pre>. Non compatible IE.</li>
+                <li><span class="keyword">String</span> <pre>prevValue</pre>: ancienne valeur de <pre>nodeValue</pre>. Non compatible IE.</li>
+                <li><span class="keyword">Element</span> <pre>relatedNode</pre>: similaire à <pre>relatedTarget</pre> pour le type mutation events. Non compatible IE.</li>
+            </ul>
+        </li>
+        <br/>
+        <li><span class="hilite">Propriétés relatives aux événements de type Mouse Events(événements liés à la souris)</span>:
+            <ul>
+                <li><span class="keyword">Number</span> <pre>button</pre>: bouton de la souris responsable du clic. <span class="number">0</span> ou <span class="number">1</span> = bouton gauche, <span class="number">2</span> = bouton droit.</li>
+                <li><span class="keyword">Number</span> <pre>which</pre>: bouton de la souris responsable du clic pour les navigateurs ne supportant pas <pre>button</pre>. <span class="number">1</span> = bouton gauche, <span class="number">3</span> = bouton droit.</li>
+                <li><span class="keyword">Variant</span> <pre>detail</pre>: informations supplémentaires dépendant de l'événement, par exemple pour un clic, la propriété peut contenir le ombre de clics consécutifs. Non compatible IE.</li>
+                <li><span class="keyword">Number</span> <pre>pageX</pre>: position horizontale de la souris par rapport à la page. Non compatible IE.</li>
+                <li><span class="keyword">Number</span> <pre>pageY</pre>: position verticale de la souris par rapport à la page. Non compatible IE.</li>
+                <li><span class="keyword">Number</span> <pre>clientX</pre>: Idem <pre>pageX</pre> pour IE.</li>
+                <li><span class="keyword">Number</span> <pre>clientY</pre>: Idem <pre>pageY</pre> pour IE.</li>
+                <li><span class="keyword">Number</span> <pre>screenX</pre>: position horizontale de la souris par rapport à l'écran.</li>
+                <li><span class="keyword">Number</span> <pre>screenY</pre>: position verticale de la souris par rapport à l'écran.</li>
+                <li><span class="keyword">Element</span> <pre>relatedTarget</pre>: élément significatif pour l'événement. Par exemple l'élément sur lequel la souris était avant de passer sur l'élément actuel pour l'événement <span class="string">'mouseover'</span>. Non compatible IE.</li>
+                <li><span class="keyword">Element</span> <pre>fromElement</pre>: élément sur lequel la souris était avant de passer sur l'élément actuel pour l'événement <span class="string">'mouseover'</span>. IE uniquement.</li>
+                <li><span class="keyword">Element</span> <pre>toElement</pre>: élément que la souris est sur le point de quitter pour l'événement <span class="string">'mouseout'</span>. IE uniquement.</li>
+            </ul>
+        </li>
+    </ul>
+</p>

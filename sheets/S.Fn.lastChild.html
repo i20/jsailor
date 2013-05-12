@@ -1,0 +1,155 @@
+<h3><span class="keyword">JSailor</span> S.Fn.lastChild()</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie un objet JSailor dont la collection est composée des derniers enfants de chaque élément de l'ancienne.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>L'utilisation de cette fonction est préférable à <pre>S.Fn.children().last()</pre> car plus efficace.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'div'</span>).lastChild().css(<span class="string">'color'</span>, <span class="string">'red'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;span&gt;</span>Je suis le premier span.<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;span&gt;</span>Je suis le second span.<span class="tag">&lt;/span&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;span&gt;</span>Je suis le troisième span.<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le quatrième paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+<h3><span class="keyword">JSailor</span> S.Fn.lastChild(<span class="keyword">String</span> expr)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie un objet JSailor dont la collection est composée des derniers enfants de chaque élément de l'ancienne qui correspondent au sélecteur <pre>expr</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'div'</span>).lastChild(<span class="string">'span'</span>).css(<span class="string">'color'</span>, <span class="string">'red'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;span&gt;</span>Je suis le premier span.<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;span&gt;</span>Je suis le second span.<span class="tag">&lt;/span&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;span&gt;</span>Je suis le troisième span.<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le quatrième paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+<h3><span class="keyword">JSailor</span> S.Fn.lastChild(<span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Renvoie un objet JSailor dont la collection est composée des derniers enfants de chaque élément de l'ancienne qui satisfont le prédicat <pre>fn</pre>.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            S(<span class="string">'div'</span>).lastChild(<span class="keyword">function</span>(){
+
+                <span class="keyword">return</span> S(<span class="keyword">this</span>).tag() === <span class="string">'SPAN'</span>;
+
+            }).css(<span class="string">'color'</span>, <span class="string">'red'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;span&gt;</span>Je suis le premier span.<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;span&gt;</span>Je suis le second span.<span class="tag">&lt;/span&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;span&gt;</span>Je suis le troisième span.<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Je suis le quatrième paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

@@ -1,0 +1,117 @@
+<h3><span class="keyword">JSailor</span> S.Fn.item(<span class="keyword">Number</span> pos)</h3>
+
+<p>Description:
+    <ul>
+        <li>Réduit la collection JSailor à l'élément situé à la position <pre>pos</pre> dans l'ancienne.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>pos</pre> peut-être négatif, dans ce cas il exprime la position depuis la fin de la collection(<span class="number">-1</span> correspond à la dernière position).</li>
+        <li>Il est possible de sélectionner plusieurs positions(voir suite)</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">var</span> paras = S(<span class="string">'p'</span>);
+
+            paras.item(<span class="number">0</span>).css(<span class="string">'color'</span>, <span class="string">'red'</span>);
+            paras.item(<span class="number">4</span>).css(<span class="string">'color'</span>, <span class="string">'green'</span>);
+            paras.item(<span class="number">-1</span>).css(<span class="string">'color'</span>, <span class="string">'blue'</span>);
+            paras.item(<span class="number">-4</span>).css(<span class="string">'color'</span>, <span class="string">'orange'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+         <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le quatrième paragraphe.<span class="tag">&lt;/p&gt;</span>
+             <span class="tag">&lt;p&gt;</span>Je suis le cinquième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+         <span class="tag">&lt;p&gt;</span>Je suis le sixième paragraphe.<span class="tag">&lt;/p&gt;</span>
+          <span class="tag">&lt;p&gt;</span>Je suis le septième paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>
+
+<hr/>
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+<h3><span class="keyword">JSailor</span> S.Fn.item(<span class="keyword">String</span> pos)</h3>
+
+<p>Description:
+    <ul>
+        <li>Réduit la collection JSailor aux éléments situés aux positions décrites par <pre>pos</pre> dans l'ancienne.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li>Possibilité de combiner les expressions en les séparant par une virgule.</li>
+        <li><span class="string">'odd'</span> correspond aux positions impaires(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> etc…).</li>
+        <li><span class="string">'even'</span> correspond aux positions paires(<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span> etc…).</li>
+        <li><span class="string">'first'</span> correspond à la première position(<span class="number">0</span>).</li>
+        <li><span class="string">'last'</span> correspond à la dernière position(<span class="number">-1</span>).</li>
+        <li><span class="string">'...n...'</span> correspond aux positions qui peuvent s'écrirent en remplaçant <pre>n</pre> par un entier(<span class="string">'2n+1'</span> position impaires, <span class="string">'2n'</span> position paires).</li>
+        <li><span class="string">'a-b'</span> correspond aux positions comprises entre a et b comprises.</li>
+        <li><span class="string">'a,b'</span> correspond aux positions a et b.</li>
+        <li>Les combinaisons sont toujours possibles.</li>
+    </ul>
+</p>
+
+<p>Exemples:
+    <ul>
+
+        <li>
+<pre class="script"><span class="tag">&lt;html&gt;</span>
+    <span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-1.1.4.min.js&quot;</span>&gt;&lt;/script&gt;</span>
+        <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
+        S(<span class="keyword">function</span>(){
+
+            <span class="keyword">var</span> paras = S(<span class="string">'p'</span>);
+
+            paras.item(<span class="number">0</span>).css(<span class="string">'color'</span>, <span class="string">'red'</span>);
+            paras.item(<span class="number">4</span>).css(<span class="string">'color'</span>, <span class="string">'green'</span>);
+            paras.item(<span class="number">-1</span>).css(<span class="string">'color'</span>, <span class="string">'blue'</span>);
+            paras.item(<span class="number">-4</span>).css(<span class="string">'color'</span>, <span class="string">'orange'</span>);
+
+        });
+        <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;/head&gt;</span>
+    <span class="tag">&lt;body&gt;</span>
+         <span class="tag">&lt;p&gt;</span>Je suis le premier paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le second paragraphe.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le troisième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Je suis le quatrième paragraphe.<span class="tag">&lt;/p&gt;</span>
+             <span class="tag">&lt;p&gt;</span>Je suis le cinquième paragraphe.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+         <span class="tag">&lt;p&gt;</span>Je suis le sixième paragraphe.<span class="tag">&lt;/p&gt;</span>
+          <span class="tag">&lt;p&gt;</span>Je suis le septième paragraphe.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+        </li>
+
+    </ul>
+</p>

@@ -1,0 +1,17 @@
+<h3><span class="keyword">JSailor</span> S.Fn.bind(<span class="keyword">String</span> type, <span class="keyword">Function</span> fn)</h3>
+
+<p>Description:
+    <ul>
+        <li>Attache le gestionnaire d'événement <pre>ontype = fn</pre> à tous les éléments de la collection et renvoie l'objet JSailor initial.</li>
+    </ul>
+</p>
+
+<p>Remarques:
+    <ul>
+        <li><pre>type</pre> correspond au type d'événement non préfixé par <span class="string">'on'</span>.</li>
+        <li>Il vous est possible d'attacher <pre>fn</pre> à plusieurs événements simultanément en utilisant la syntaxe <span class="string">'type1 type2 type3'</span> pour <pre>type</pre>.</li>
+        <li>Les anciens gestionnaires d'événement du même type attachés à <pre>elt</pre> ne seront pas écrasés.</li>
+        <li><pre>fn</pre> prend en paramètre l'objet événement.</li>
+        <li><pre>fn</pre> peut retourner un booléen: <pre class="keyword">false</pre>, bloque l'action par défaut de l'événement(idem <pre>event.preventDefault()</pre>); <pre class="keyword">true</pre>, stoppe la propagation de l'événement(idem <pre>event.stopPropagation()</pre>).</li>
+    </ul>
+</p>
