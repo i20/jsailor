@@ -2532,6 +2532,16 @@
 
                 S.Ajax.request( S.Object.extend(setting, setup) );
             };
+            
+            var uurl = function(url){
+                    
+                var nocache = 0;
+                
+                while(new RegExp('(\\?|&)[' + nocache + ']=').test(url))
+                    nocache++; 
+
+                return url += ( /\?/.test(url) ? '&' : '?') + '[' + nocache + ']=' + S.Time.now();
+            };
 
             return {
 
@@ -2772,11 +2782,14 @@
                                     params.fail.call(this, res);
                     },
 
-                    //determine si la requete necessite un vrai xhr
+                    // Determine si la requete necessite un vrai xhr
                     fromCache = false,
                     cache = Cache.ajax,
                     cacheresources = cache.resources,
                     xhr,
+                    // URL modifiee de la requete (avec token), ne doit pas reecrire la vraie URL dont on aura besoin pour creer
+                    // l'entree dans le nested cache (cf premiere requete en mode 'valid')
+                    reqURL;
 
                     //genere le faux xhr et fini la requete cachee
                     finish = function(statusc, responseTextc){
@@ -2820,13 +2833,17 @@
                     /*********************
                      CONSULTATION DU CACHE
                      *********************/
+                    // La reponse contient la derniere version de la ressource
                     if(params.cache === 'valid'){
-
-                        params.headers.cacheControl = 'must-revalidate, public';
-
-                        if(cacheresources[params.url]){
-
-                            //lastModified existe forcement car mis par defaut au jeudi 1er janvier 70
+                    	
+                    	if(cacheresources[params.url]){
+                        	
+                        	// max-age=0: a priori le cache doit etre considere comme perime
+                            // must-revalidate: on precise qu'il faut revalider car certains caches renvoient des reponses meme perimees
+                            // public: la reponse pourra etre cachee partout
+                            params.headers.cacheControl = 'max-age=0, must-revalidate, public';
+                            
+                            // lastModified existe forcement car mis par defaut au jeudi 1er janvier 70
                             params.headers.ifModifiedSince = cacheresources[params.url].lastModified;
 
                             if(cacheresources[params.url].etag)
@@ -2834,56 +2851,44 @@
 
                             params[4] = function(res){
 
-                                //ne pas faire le callback normal tout de suite
-                                //si 304 car la requete n'est pas finie
+                                // ne pas faire le callback normal tout de suite
+                                // si 304 car la requete n'est pas finie
                                 if(this.status === 304){
-
-                                    cacheresources[params.url].access++;
+                                	
+                                	cacheresources[params.url].access++;
                                     finish(304, cacheresources[params.url].content);
                                 }
                                 else
                                     buffer4bis.call(this, res);
                             };
                         }
-                        //else
-                        //    params.headers.ifModifiedSince = S.Time.epoch();
-                    }
-
-                    else if(params.cache === 'isset'){
-
-                        if(cacheresources[params.url]){
-
-                            cacheresources[params.url].access++;
-                            finish(200, cacheresources[params.url].content);
-                        }
+                        
+                        // Si on ne force pas la main, IE va aller chercher une ressource perimee dans son cache pour la premiere requete
+                        // params.url doit rester vierge car sinon pas moyen de faire une entree reutilisable dans le nested cache car unique
                         else
-                            params.headers.cacheControl = 'max-age=' + S.Time.now() + ', public';
+                            reqURL = uurl(params.url);
                     }
-
-                    else if(params.cache === 'only'){
-
-                        //ce cas n'est en fait jamais traite avec le trueCache
-                        //de toute facon il n'est pas du tout fiable
-
-                        if(cacheresources[params.url]){
-
-                            cacheresources[params.url].access++;
-                            finish(200, cacheresources[params.url].content);
-                        }
-                        else
-                            params.headers.cacheControl = 'only-if-cached';
-                    }
-
+                    // La reponse vient ne peut venir que du serveur
                     else if(params.cache === 'never'){
 
-                        params.headers.cacheControl = 'max-age=0, no-store';
-
-                        var nocache = 0;
+                        params.headers.cacheControl = 'no-cache, no-store';
                         
-                        while(new RegExp('(\\?|&)[' + nocache + ']=').test(params.url))
-                            nocache++; 
-
-                        params.url += ( /\?/.test(params.url) ? '&' : '?') + '[' + nocache + ']=' + S.Time.now();
+                        reqURL = uurl(params.url);
+                    }
+                    // isset/only
+                    else{
+                        
+                        if(cacheresources[params.url]){
+                            
+                            cacheresources[params.url].access++;
+                            finish(200, cacheresources[params.url].content);
+                        }
+                        else if(params.cache === 'isset')
+                            params.headers.cacheControl = 'max-age=' + S.Time.now() + ', public';
+                        
+                        // On n'essaye meme pas de traiter avce le vrai cache client car seul Safari gere le header 'only-if-cached'
+                        else if(params.cache === 'only')
+                            finish(200/*, undefined*/);
                     }
 
                     //si connexion necessaire
@@ -2929,13 +2934,11 @@
                         //un try catch pour les tests locaux foireux ^^
                         try{
 
-                            xhr.open(params.method, params.url, params.async, params.user, params.password);
-							//console.log('xhr.open('+params.method+', '+params.url+', '+params.async+', '+params.user+', '+params.password+')');
+                            xhr.open(params.method, reqURL || params.url, params.async, params.user, params.password);
 							
                             Fi(params.headers, function(header, value){
 
                                 xhr.setRequestHeader(header.charAt(0).toUpperCase() + header.substring(1).replace(/([A-Z])/g, '-$1'), value);
-                                //console.log('xhr.setRequestHeader('+header.charAt(0).toUpperCase() + header.substring(1).replace(/([A-Z])/g, '-$1')+', '+value+')');
                             });
 
                             xhr.send(params.data);
