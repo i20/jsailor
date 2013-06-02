@@ -994,8 +994,7 @@
 
                     cache.selectors[expr] = this;
 
-                    coll = /*Support.querySelector ? S.Dom.collecToArray(document.querySelectorAll(expr)) : */
-                           S(document).descendants(expr).$;
+                    coll = S(document).descendants(expr).$;
                 }
             }
 
@@ -2736,7 +2735,7 @@
                                     var least = cacheresources[leastUsed];
 
                                     //liberation rapide de la place avant le garbage collector
-                                    least.content = '';
+                                    least.content = null;
 
                                     cache.size -= least.size;
 
@@ -3089,6 +3088,11 @@
                                         fchar === '@' && elt.nodeType === 9 ? elt.getElementsByName( reste ) :
                                         fchar === '.' && elt.getElementsByClassName ? elt.getElementsByClassName( reste ) :
                                         rfilter.test(expr) ? S(elt).descendants().and(expr) : elt.getElementsByTagName(expr);
+                                        /*rfilter.test(expr) ? 
+                                            (Support.querySelector ? 
+                                                elt.querySelectorAll(expr) : 
+                                                S(elt).descendants().and(expr)) : 
+                                             elt.getElementsByTagName(expr);*/
 
                             })(this) );
                         });
@@ -3110,7 +3114,8 @@
                 }
 
                 //predicat
-                else return this.descendants().and(expr);
+                else
+                    return this.descendants().and(expr);
             },
 
             children: function(expr){
