@@ -54,9 +54,6 @@
 
     })();
 
-    //Extended Selectors qui ne sont pas pris en charge par querySelectorAll
-    //ES = ['@', '!='],
-
     var S = function(expr){ return new S.JSailor(expr); },
 
     Fl = function(list, fn){
@@ -3065,9 +3062,28 @@
 
             descendants: function(expr){
 
+                // No parameter or a selector
                 if( !expr || S.Test.isString(expr) ){
 
                     expr = expr ? Eval.clean(expr) : '*';
+                    
+                    // If a speed up is available, try to use it
+                    if(Support.querySelector){
+                    
+                        try{
+                            
+                            var res = S();
+                            
+                            this.each(function(){
+
+                                res = res.or(this.querySelectorAll(expr));
+                            });
+                            
+                            return res;
+                        }
+                        // If querySelectorAll does not support the selector let's continue as usual
+                        catch(e){}
+                    }
 
                     //.descendants('#...')
                     if( Rex.rsimple.test(expr) ){
@@ -3076,25 +3092,14 @@
                             //early binding
                             fchar = expr.charAt(0),
                             reste = expr.substring(1),
-                            rfilter = new RegExp('[' + Rex.srfilter + ']');
+                            isfilter = new RegExp('[' + Rex.srfilter + ']').test(expr);
 
                         this.each(function(){
 
-                            res = res.or( (function(elt){
-
-                                //ne pas utiliser switch a cause des case sans break qui ne fonctionnenent pas comme attendu
-                                
-                                return  fchar === '#' && elt.nodeType === 9 ? elt.getElementById( reste ) :
-                                        fchar === '@' && elt.nodeType === 9 ? elt.getElementsByName( reste ) :
-                                        fchar === '.' && elt.getElementsByClassName ? elt.getElementsByClassName( reste ) :
-                                        rfilter.test(expr) ? S(elt).descendants().and(expr) : elt.getElementsByTagName(expr);
-                                        /*rfilter.test(expr) ? 
-                                            (Support.querySelector ? 
-                                                elt.querySelectorAll(expr) : 
-                                                S(elt).descendants().and(expr)) : 
-                                             elt.getElementsByTagName(expr);*/
-
-                            })(this) );
+                            res = res.or(fchar === '#' && this.nodeType === 9 ? this.getElementById( reste ) :
+                                         fchar === '@' && this.nodeType === 9 ? this.getElementsByName( reste ) :
+                                         fchar === '.' && this.getElementsByClassName ? this.getElementsByClassName( reste ) :
+                                         isfilter ? S(this).descendants().and(expr) : this.getElementsByTagName(expr));
                         });
 
                         return res;
