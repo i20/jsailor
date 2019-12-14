@@ -2,17 +2,20 @@
  * JSailor JavaScript Library
  *
  * Version 1.1.7
- * Copyright 2012 Yvain Giffoni
+ * Copyright 2013 Yvain Giffoni
  *
- * Date: 2012-12-07 20:42:51 (Fri, 07 Dec 2012)
+ * Date: 2013-10-10 19:28:04 (Thu, 19 Oct 2013)
  *
  * Special thanks to John Resig, Dean Edwards and the Sizzle project's team
- * who helped me to understand the depths of JavaScript!
+ * who helped me to understand the depths of Javascript!
  *
  */
 
 (function(container, window, undefined){
 
+    // Fetching main properties and functions from the local window object to speed up
+    // Since the local window variable is the only one we can rely on, we need to call explicitly all properties and functions on it
+    // ex: window.XMLHttpRequest instead of XMLHttpRequest
     var document = window.document,
         location = window.location,
         navigator = window.navigator,
@@ -29,6 +32,7 @@
         clearInterval = window.clearInterval,
         isNaN = window.isNaN;
 
+    // Determining browser support for useful tools
     var Support = {
 
         computedStyle: 'getComputedStyle' in window,
@@ -40,10 +44,10 @@
 
         var element = document.createElement('div'),
 			frag = document.createDocumentFragment();
-		
-		//si on attache pas l'element temporaire a un fragment .currentStyle chez IE reste null
+
+		// In IE element.currentStyle is null until we attache it to a fragment
 		frag.appendChild(element);
-		
+
         Support.elementFocus = 'childElementCount' in element;
         Support.textContent = 'textContent' in element;
 
@@ -54,6 +58,7 @@
 
     })();
 
+    // The magic function
     var S = function(expr){ return new S.JSailor(expr); },
 
     Fl = function(list, fn){
@@ -70,7 +75,7 @@
         var rnumber = Rex.rnumber;
 
         for(var i in obj)
-            //les i sont toujours des string meme avec un array
+            // Properties' names are always string even with array
             if(obj.hasOwnProperty(i) && fn.call(obj[i], parse && rnumber.test(i) ? i - 0 : i, obj[i]) === false)
                 break;
     },
@@ -81,12 +86,12 @@
 
         clean: function(expr){
 
-            //supprime les espaces inutiles
+            // Clean up useless spaces
             expr = S.String.singleSpaces(expr)
                 .replace(/^\s|\s$/g, '')
                 .replace(new RegExp(' ?([' + Rex.srshort + Rex.srcss3 + '()]) ?', 'g'), '$1');
 
-            //decapsulation, la ) doit correspondre a celle de debut sinon cas S('(...)|(...)')
+            // Decapsulation, ending ) must correspond to the opening one otherwise it can be S('(...)|(...)')
             if(/^\(.+\)$/.test(expr) && S.String.indexOfEndingBracket(0, expr) === expr.length - 1)
                 expr = expr.substring(1, expr.length - 1);
 
@@ -97,7 +102,7 @@
 
             var ishort, icss3, ifilter,
                 npar, ncro,
-                //early binding
+                // Early binding
                 rshort = new RegExp('[' + Rex.srshort + ']'),
                 rcss3 = new RegExp('[' + Rex.srcss3 + ']'),
                 rfilter = new RegExp('[' + Rex.srfilter + ']'),
@@ -106,7 +111,7 @@
             ishort = icss3 = ifilter = -1,
             npar = ncro = 0;
 
-            //tester le 1er char n'est pas necessaire
+            // First char testing must not be tested since simple selectors must not produce indexes
             for(var i = expr.length - 1; i > 0; i--){
 
                 char = expr.charAt(i);
@@ -116,10 +121,10 @@
                     case ')': npar++; break;
                     case '(': npar--; break;
                     case ']': ncro++; break;
-                    case '[': ncro--; //pas de break car [ est un filter!
+                    case '[': ncro--; // No break since [ is a filter
                     default:
 
-                        if( !(npar || ncro) ){
+                        if( !npar && !ncro ){
 
                             if( rshort.test(char) && ishort < 0 ) ishort = i;
                             else if( rcss3.test(char) && icss3 < 0 ) icss3 = i;
@@ -139,10 +144,12 @@
 
                 expr = this.clean(expr);
 
-                //.filter('#â€¦')
-                if( Rex.rsimple.test(expr) ){
+                var split = Eval.split(expr);
 
-                    //exit direct cas trivial utile pour .and(expr || '*')
+                // .filter('#...')
+                if( split[0] < 0 && split[1] < 0 && split[2] < 0 ){
+
+                    // Early exit
                     if(expr === '*')
                         return logic ? root : S();
 
@@ -154,6 +161,7 @@
 
                                 var value = expr.substring(1);
 
+                                // TODO uniq = !S.Dom.isXML(document)
                                 uniq = true;
 
                                 return function(){ return this.id == value; };
@@ -289,50 +297,44 @@
                     })(), root, logic, uniq );
                 }
 
-                //not() n'utilise jamais cette partie
-                else{
+                // .not() never falls down there
 
-                    var indexes = this.split(expr);
+                /*
+                !(e1 & e2) = !e1 | !e2
+                !(e1 | e2) = !e1 & !e2
+                !(e1 ! e2) = !(e1 & !e2) = !e1 | e2
+                !(e1 ^ e2) = (!e1 & !e2) | (e1 & e2)
+                           = !(e1 | e2) | !(!e1 | !e2)
+                           = !(y1 & y2)    y1=(e1 | e2)  y2=(!e1 | !e2)
+                           = !y1 | !y2
+                           = (!e1 & !e2) | ...*/
 
-                    /*!(e1 & e2) = !e1 | !e2
-                    !(e1 | e2) = !e1 & !e2
-                    !(e1 ! e2) = !(e1 & !e2) = !e1 | e2
-                    !(e1 ^ e2) = (!e1 & !e2) | (e1 & e2)
-                               = !(e1 | e2) | !(!e1 | !e2)
-                               = !(y1 & y2)    y1=(e1 | e2)  y2=(!e1 | !e2)
-                               = !y1 | !y2
-                               = (!e1 & !e2) | ...*/
+                // .filter('...|...')
+                else if(split[0] + 1)
+                    return root.and( expr.substring(0, split[0]) )[ Short[expr.charAt(split[0])] ]( root.and( expr.substring(split[0] + 1) ) );
 
-                    //.filter('...|...')
-                    if(indexes[0] + 1)
+                // .filter('...~...')
+                else if(split[1] + 1){
 
-                        return root.and( expr.substring(0, indexes[0]) )[ Short[expr.charAt(indexes[0])] ]( root.and( expr.substring(indexes[0] + 1) ) );
+                    var meth = CSS3.and[expr.charAt(split[1])],
+                        before = expr.substring(0, split[1]);
 
-
-                    //.filter('...~...')
-                    else if(indexes[1] + 1){
-
-                        var meth = CSS3.and[expr.charAt(indexes[1])],
-                            before = expr.substring(0, indexes[1]);
-
-                        //inversement par rapport a descendants()
-                        return root.and( expr.substring(indexes[1] + 1) ).and(function(){ return S(this)[meth](before).length; });
-                    }
-
-                    //.filter('...#...')
-                    else
-
-                        return root.and( expr.substring(0, indexes[2]) ).and( expr.substring(indexes[2]) );
-
+                    //inversement par rapport a descendants()
+                    return root.and( expr.substring(split[1] + 1) ).and(function(){ return S(this)[meth](before).length; });
                 }
+
+                // .filter('...#...')
+                else
+                    return root.and( expr.substring(0, split[2]) ).and( expr.substring(split[2]) );
             }
-            //fonction predicat
+            // .filter(function(){ ... })
             else{
 
                 var res = [];
 
                 root.each(function(){
-                    //simple ==  car souvent on ne mettra rien pour false
+
+                    // Not === since logic will often be undefined
                     if(expr.call(this) == logic){
 
                         res.push(this);
@@ -350,21 +352,21 @@
 
         ajax: {
 
-            //taille en octets du cache
+            // Size of cache in bytes
             size: 0,
 
             resources: {
 
-                /*url: {
-
-                    date: ,
-                    size: ,
-                    access: ,
-                    lastModified: ,
-                    etag: ,
-                    content:
-                },
-                ...*/
+//                url: {
+//
+//                    date: ,
+//                    size: ,
+//                    access: ,
+//                    lastModified: ,
+//                    etag: ,
+//                    content:
+//                },
+//                ...
             }
         },
 
@@ -374,17 +376,14 @@
 
             selectors: {
 
-                /*regexp: S(regexp),
-                ...*/
+//                regexp: S(regexp),
+//                ...
             }
         }
     },
 
-    //backup des styles des elements pour slideUp, slideDown etc
-    Style = {
-
-
-    },
+    // Style backup for rollback animations (slideUp, slideDown etc ...)
+    Style = {},
 
     Rex = {
 
@@ -394,7 +393,7 @@
 
         rinput: /^(?:input|button|textarea|select)$/i,
 
-        //3, -3, 3., 3.5, .5
+        // 3, -3, 3., 3.5, .5
         rnumber: /^-?(?:\d+(?:\.\d*)?|\.\d+)$/,
 
         rboolean: /^(?:true|false)$/,
@@ -411,15 +410,16 @@
 
         rspecialevent: /^(?:hatch|die)$/,
 
-        //urls contenant des identifiants de connexion
-        rurlog: /^([a-z]+):\/\/([^:]+):([^:]+)@/i,
+        // URLs including authentication logs
+        //rurlog: /^([a-z0-9]+):\/\/([^:]+):([^:]+)@/i,
+        rurlog: /^([a-z0-9]+):\/\/(?:([^:]+):)?([^:]+)@/i,
 
         remail: /^[a-z0-9_.-]+@(?:[a-z0-9_-]+\.)+[a-z]{2,4}$/i,
 
         rmarkupext: /^(?:xml|rss|atom|html?)$/i,
 
-        //extension pages web dynamiques php, java, asp, coldfusion
-        //attention il peut y avoir des variable GET donc pas de $
+        // Dynamic webpages' extensions (php, java, asp, coldfusion)
+        // Watch out for GET vars (no $ in regexp)
         rdynext: /^(?:php\d?|jsp|as[pc]x?|cf[mc])/i,
 
         rlocal: /(?:file|-extension):$/,
@@ -430,7 +430,7 @@
 
         srcss3: '> +~',
 
-        //le double \\ sur les meta-chars est necessaire pour creer une regexp a partir d'une chaine
+        // Double \\ to escape metachars needed since the regexp is in a string
         srfilter: '#.@\\[:'
     },
 
@@ -441,29 +441,24 @@
         stock: {},
 
         active: function(regexp, type, handlerId){
-            
-            //console.log('Active for ' + regexp + ' on ' + type + ' from ' + arguments.caller);
 
             var regexpdata = this.stock[regexp],
                 mutationdata = regexpdata.mutation,
                 data = regexpdata[type][handlerId];
 
-            //les donnees ne correspondent pas a la mutation courante
-            //-------------------------------------------------------------------------------------
-            //attention cette mise a jour doit etre effectuee avant toute execution de .fire()
-            //car si ladite fonction contient une instruction .css(), .prop(), .attr() ou .remove() alors elle
-            //reexecute immediatement Life.active() sans laisser le temps au set d'etre mis a jour creant ainsi une
-            //merveilleuse boucle infine! Ce bug n'est visible que dans le cas de IE et Opera car pour les W3C
-            //le mutationevent DOMSubtreeModified se declenche bien apres la fin de Life.active() et donc laisse
-            //le temps au set d'etre change
+            // Data does not correspond to the current mutation
             if(mutationdata.id !== this.id){
+
+                // The set update must be done before any call to .fire() cause if the handler contains an instruction
+                // like .css(), .prop(), .attr() or .remove() then Life.active() is immediatly reexectuted on the unupdated
+                // set and we get a fabulous infinite loop
 
                 var set = S(regexp);
 
                 mutationdata.id = this.id;
                 mutationdata.newels = set.not(mutationdata.set);
                 mutationdata.expels = mutationdata.set.not(set);
-                //a faire apres newels et expels qui ont besoin de l'ancien set
+                // To be done after newels and expels since they need the old set
                 mutationdata.set = set;
             }
 
@@ -473,7 +468,7 @@
             else if(type === 'die')
                 mutationdata.expels.each(data.action);
 
-            //types simples(click, etc...)
+            // Simple types (click, etc ...)
             else{
 
                 mutationdata.newels.bind(type, data.action);
@@ -494,9 +489,9 @@
 
             this.anims[++this.id] = {
 
-                //nb d'elements executant encore cette anim
+                // Number of elements still being animated
                 length: 0,
-                //infos attachee a l'anim
+                // Animation's info
                 delay: delay,
                 method: method,
                 start: S.Time.now(),
@@ -509,7 +504,7 @@
             this.anims[this.id].length++;
         },
 
-        //memoire des proprietes css sous forme de ratio
+        // List of css properties which uses ratio (0 -> 1)
         sratio: 'opacity zoom',
 
         cssToJsProp: (function(){
@@ -523,7 +518,7 @@
 
         })(),
 
-        //determine les valeurs relatives
+        // Calcul for relative values
         getFinalValue: function(from, ope, to){
 
             return  ope === '+' ? from + to :
@@ -536,13 +531,10 @@
                     to;
         },
 
-        //Les 2 fonctions evalue... permettent la gestion des valeurs relatives pour .tune() et .css(),
-        //on pourrait croire que seul .css() a besoin de faire ce traitement puisque c'est lui qui est utilise
-        //dans .tune() pour changer le style mais .tune() a aussi besoin de connaitre la valeur finale
-        //absolue pour calculer les etapes et la temporisation des animations.
-        //-------------------------------------------------------------------------------------
-        //evalGeneral() decoupe la valeur donnee et prepare les infos pour evalFor() qui utilise ces infos
-        //pour generer la valeur finale pour chaque element
+        // The 2 functions below are in charge of evaluating relative values for .tune() and .css()
+        // .tune() needs it since it needs to know the final value of the animation to calcul the delay
+
+        // This function split the provided string and extract the different info for evalFor()
         evalGeneral: function(prop, to){
 
             to += '';
@@ -570,11 +562,11 @@
             else
                 type = 5;
 
-            //chiffre avec unite (px, mm, ...) = 1
-            //chiffre quelconque = 2
-            //chiffre ratio (opacity, zoom, ...) = 3
-            //couleur = 4
-            //valeur textuelle quelconque = 5
+            // Number with unit (px, mm, ...) = 1
+            // Number without unit = 2
+            // Ratio number (opacity, zoom, ...) = 3
+            // Color = 4
+            // Text value = 5
 
             return {
 
@@ -589,13 +581,12 @@
 
             var from;
 
-            //permet d'eviter des calculs inutiles dans le cas d'une valeur simple (ne necessitant pas de calculs)
+            // Avoid calculs if not needed
             if(infos.ope || (tune && infos.type < 5)){
 
                 prop = this.cssToJsProp(prop),
                 from = Rex.rcssspecialprop.test(prop) ? S(elt)[prop]() :
                        infos.type < 4 ? parseFloat(S(elt).css(prop)) :
-                       //couleur
                        S(elt).css(prop);
 
                 if(infos.type === 1)
@@ -632,7 +623,7 @@
             if( !(method in S.Easing) )
                 Error('Undefined animation method: ' + method);
 
-            //effet simple
+            // Simple effect (1 channel)
             if(data.type !== 4){
 
                 to = { value: to };
@@ -643,7 +634,7 @@
                     function(sub){ Se.css(prop, value[sub] + data.unit); } :
                     function(sub){ Se.css(prop, value[sub]); };
             }
-            //effet couleur
+            // Color effect (4 channels)
             else{
 
                 to = S.Css.toRGBa(to);
@@ -666,7 +657,7 @@
                         var now = S.Time.now(),
                             past = now - start;
 
-                        //l'animation doit se terminer
+                        // Time to finish the animation
                         if(past >= delay || !diff){
 
                             if(diff){
@@ -686,7 +677,7 @@
 
                             value[sub] = from[sub] + diff * S.Easing[method](past / delay, past, 0, 1, delay);
 
-                            //les animations couleur ne fonctionnent pas avec les flottants
+                            // Color animations need integers not floats
                             if(spec && sub !== 'alpha')
                                 value[sub] = Math.round(value[sub]);
 
@@ -704,16 +695,14 @@
             var stock = this.stock,
                 eltdata = stock[elementId];
 
-            //dans le cas d'une animation couleur qui n'a pas besoin de se faire (exemple noir -> noir)
-            //la condition de callback de active cree une erreur pour chacun des 3 derniers canaux car
-            //la condition est satisfaite pour le premier canal et l'entree est donc effacee et n'existe
-            //plus pour les 3 autres
+            // With the specific case of a color animation which does not need to be processed (black -> black)
+            // eltdata is deleted on the first channel callback and no more exists for the 3 remaining channels
             if(eltdata){
 
                 var props = eltdata.prop,
                     data = props[prop];
 
-                //meme probleme que plus haut
+                // See comment above
                 if(data){
 
                     var anims = this.anims,
@@ -725,7 +714,7 @@
 
                     delete props[prop];
 
-                    //animation finie sur cet element
+                    // Animation finished on the element
                     if( !--iddata.length ){
 
                         if( !--animdata.length )
@@ -743,11 +732,11 @@
         }
     },
 
-    //declare ici a cause de son implication dans Handler
+    // This object is used in Handler
     Browser = {
 
-        //utiliser nav.toLowerCase() et pas /.../i car name doit etre en minuscules
-        //'' par defaut si konqueror ou autre car si browser === null //.test(browser) bug
+        // Must use nav.toLowerCase() instead of /.../i since the returned name must be lower cased
+        // No match must return '' to prevent error on /.../.test(browser)
         name: (function(){
 
             var bname = Rex.rbrowser.exec( navigator.userAgent.toLowerCase() );
@@ -755,8 +744,8 @@
             return bname ? bname[0] : '';
         })(),
 
-        //undefined sur IE5 qui est toujours en quirks
-        quirkMode: !(document.compatMode === 'CSS1Compat')
+        // Property is undefined on IE5 which is always in quirk mode
+        quirkMode: document.compatMode !== 'CSS1Compat'
     },
 
     Handler = {
@@ -771,20 +760,18 @@
             var eltdata = this.stock[elementId],
                 data = eltdata[type][handlerId];
 
-            //pour IE event est stocke dans une variable globale
+            // IE stocks the event object in a global var
             if(!event)
                 event = S.Dom.parentWindow(eltdata.e).event;
 
-            //on fait ressembler l'objet event a celui du w3c
-            //ne pas reecrire si les prop sont deja dispo car leve exception
+            // Normalize the event object, existing properties raise error when trying to override it
             if(!event.type)
                 event.type = type;
 
             if(!event.target)
                 event.target = event.srcElement;
 
-            //2 if car si currentTarget existe ce n'est pas forcement qu'il est gere mais
-            //plutot qu'on l'a deja calcule
+            // 2 if cause if currentTarget is defined it may be cause we already calculate it
             if(!event.currentTarget)
                 event.needCurrentTarget = true;
             if(event.needCurrentTarget)
@@ -799,14 +786,13 @@
             if(!event.BUBBLING_PHASE)
                 event.BUBBLING_PHASE = 3;
 
-            //2 if car si eventPhase existe ce n'est pas forcement qu'il est gere mais
-            //plutot qu'on l'a deja calcule
+            // See comment above
             if(!event.eventPhase)
                 event.needEventPhase = true;
             if(event.needEventPhase)
                 event.eventPhase = event.currentTarget === event.target ? event.AT_TARGET :
-                                    S(event.currentTarget).descendants().indexOf(event.target) !== -1 ? event.CAPTURING_PHASE :
-                                    event.BUBBLING_PHASE;
+                                   S(event.currentTarget).descendants().indexOf(event.target) !== -1 ? event.CAPTURING_PHASE :
+                                   event.BUBBLING_PHASE;
 
             if(!('bubbles' in event))
                 event.bubbles = !event.cancelBubble;
@@ -816,7 +802,6 @@
 
             if(!event.preventDefault)
                 event.preventDefault = function(){ this.returnValue = false; };
-
 
             var result = data.action.call(eltdata.e, event);
 
@@ -833,19 +818,19 @@
         '!': 'not',
         '&': 'and',
         '|': 'or',
-        //alias officiel
+        // Official alias for or
         ',': 'or',
         '^': 'xor'
     },
 
     CSS3 = {
 
-        /* '>' descendance directe(enfants)
-           ' ' descendance indirecte(descendants)
-           '+' adjacence directe
-           '~' adjacence indirecte */
+        // '>' direct descendance (children)
+        // ' ' indirect descendance (descendants)
+        // '+' direct adjacence
+        // '~' indirect adjacence
 
-        //and filtre a rebours de descendants
+        // and filters in reverse descendants
         and: {
 
             '>': 'parent',
@@ -863,7 +848,7 @@
         }
     };
 
-    //declare a la main car contient extend qui sert pour declarer tout le reste
+    // Manually declared since it contains the extend method which is used to declare all the rest
     S.Object = {
 
         each: Fi,
@@ -872,12 +857,12 @@
 
             this.each(set, function(i, j){
 
-                //La clause try/catch permet de ne pas tenir compte des proprietes read-only
-                //qui generent des erreurs quand on tente de les reecrire, l'exemple le plus
+                // Readonly properties raise errors when trying to override it
                 try{ base[i] = j; }
                 catch(e){}
             });
-            //si base n'est pas une reference
+
+            // If base is not passed by reference
             return base;
         },
 
@@ -886,10 +871,10 @@
             return this.extend({}, obj);
         },
 
-        //pour les browsers qui ne gerent pas ces nouvelles methodes
+        // Adding support for old browsers
         isExtensible: window.Object.isExtensible || function(obj){
 
-            //on cherche une propriete que n'a pas encore l'objet
+            // Seeking a new property key
             for(var i = S.Time.now();
                 i in obj;
                 i++);
@@ -910,13 +895,11 @@
             if(!this.isExtensible(obj))
                 Fi(obj, function(i, data){
 
-                    //avec IE faire un delete sur une propriÃ©tÃ© sealed crÃ©e une erreur au lieu de renvoyer false
+                    // IE raises an exception when trying to delete a sealed property
                     try{
 
                         sealed = !(delete obj[i]);
 
-                        //gros probleme, l'objet Ã©tant sensÃ© Ãªtre inextensible comment pourrais-je
-                        //lui remettre la propriÃ©tÃ© que je viens de supprimer?
                         if(!sealed) obj[i] = data;
 
                         return sealed;
@@ -934,7 +917,7 @@
             if(this.isSealed(obj))
                 Fi(obj, function(i, data){
 
-                    //il faut une valeur differente a tout prix
+                    // Seeking a different value
                     for(var val = S.Time.now();
                         obj[i] === val;
                         val++);
@@ -942,8 +925,8 @@
                     try{
 
                         obj[i] = val;
-                        //Safari ne renvoie pas d'erreur si on assigne une nouvelle valeur a une propriete gelee
-                        //il n'en tient simplement pas compte
+
+                        // Safari fails silently when trying to override a frozen property
                         frozen = obj[i] === data;
 
                         if(!frozen) obj[i] = data;
@@ -958,12 +941,13 @@
         }
     };
 
+    // Beginning to extend the magic S
     S.Object.extend(S, {
 
+        // JSailor is a constructor not a function so it may not return any value
         JSailor: function(expr){
-        //on ne doit pas renvoyer d'objet car JSailor est un constructeur pas une fonction!!
 
-            //permet S(null) ou S(undefined)
+            // Enables S(null) or S(undefined)
             var coll = [];
 
             if( S.Test.isString(expr) ){
@@ -972,14 +956,14 @@
 
                 var cache = Cache.jsailor;
 
-                //si une version est disponible en cache
+                // If a cached version is available
                 if(expr in cache.selectors)
                     coll = cache.selectors[expr].$;
 
                 else{
 
                     if(cache.empty){
-                        
+
                         S(document).once('DOMSubtreeModified', function(){
 
                             cache.selectors = {};
@@ -1004,10 +988,7 @@
             else if(expr)
                 coll = expr.nodeType === 1 || expr.nodeType === 9 || expr.nodeType === 11 ?
                     [ expr ] :
-                    //cas d'une collection html car IE n'a pas de toString customises comme les autres
-                    //l'element select a egalement la propriete length qui correspond a son nombre
-                    //d'options donc ne pas tester .length
-                    //cas de la collection car aucun test probant
+                    // Fallback we assume it is a collection since there is no way of telling it apart
                     S.Dom.collecToArray(expr);
 
             this.$ = coll,
@@ -1016,7 +997,7 @@
 
         Key: {
 
-            //suppression
+            // Delete
             BACKSPACE: 8,
             SPACE: 32,
             TAB: 9,
@@ -1037,16 +1018,32 @@
 
                 left: 91,
                 right: 93
+            },
+
+            isUpperCaseLetter: function(keycode){
+
+                return 65 <= keycode && keycode <= 90;
+            },
+
+            isLowerCaseLetter: function(keycode){
+
+                return 97 <= keycode && keycode <= 122;
+            },
+
+            isLetter: function(keycode){
+
+                return this.isLowerCaseLetter(keycode) || this.isUpperCaseLetter(keycode);
             }
         },
 
         /*
-         * linear and swing come from jQuery v1.7.2
-         * others equations come from jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/ by George McGinley Smith
+         * Easings for style animations
+         * Linear and swing come from jQuery v1.7.2
+         * Others equations come from jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/ by George McGinley Smith
          */
         Easing: {
 
-			//default est un mot clef reserve pb IE
+			// default being a keyword some browsers does not support it as a key if not quoted (IE)
             'default': 'linear',
 
             linear: function(s, t, b, c, d){
@@ -1177,28 +1174,47 @@
             }
         },
 
-        //extenseur HTML
+        // HTML Enhancer
         Enhancer: {
 
-            //scroll anime sur les ancres vers la page courante
-            anchor: {
-                    
+            // When submitted these elements will prevent any other submission
+            submitted_once: {
+
                 on: false,
-                //- on ne gere que les ancres internes explicites, gerer les ancres
-                //internes avec chemin redondant est trop complique (vars, url rewriting...)
+                regexp: 'form[jsailor-submitted-once]',
+                each: function() {
+
+                    var submitted = false;
+
+                    S(this).submit(function(){
+
+                        if (submitted)
+                            return false;
+
+                        submitted = true;
+                        //TODO what if any other submit hook returns false and that the form is never submitted?
+                    });
+                }
+            },
+
+            // Animated scroll on same page anchors
+            anchor: {
+
+                on: false,
                 //- on ne gere pas les ancres au chargement de page car c'est tres complique
                 //pour pas grand chose, de plus cela impliquerait un smoothAnchor qui se declenche
                 //dans les premiers DOMReady handlers ce qui fait un truc assez moche avec l'exemple
                 //de Omega ou cela revient a scroller sur un element pas encore visible
+                // Only intern anchors are supported since it is very tricky to support full urls with anchor (vars, url rewriting...)
+                //
                 regexp: 'a[href^=#]',
                 each: function(){
-            
-                    //on fait tous les calculs au moment du click pour ne pas utiliser des infos obsoletes        
+
+                    var body = S('body'),
+                        hash = S(this).attr('href'),
+                        anchorelt = S(hash.length > 1 ? hash : undefined);
+
                     S(this).click(function(){
-                        
-                        var body = S('body'),
-                            hash = S(this).attr('href'),
-                            anchorelt = S(hash.length > 1 ? hash : undefined);
 
                         body.tune({
 
@@ -1206,29 +1222,59 @@
                             'scroll-top': (anchorelt.length ? anchorelt : body).top()
 
                         }, 1000, 'bounce-out', function(){
-                        
+
                             //attention return false tout seul bloque la mise du hash dans l'url
                             location.hash = hash;
                         });
-                        
+
                         //bloque le scroll natif
                         return false;
                     });
                 }
             },
 
-            //blocage du copier/coller sur les champs textes de confirmation
+            // Confirmation input useful for password first recording
+            // - paste disabled
+            // - value equal to value of reference
             retype: {
 
                 on: false,
+                // <input type="..." retype="refelementid"/>
                 regexp: 'input[retype]',
                 each: function(){
 
-                    S(this).bind('paste', function(){
+                    var e = this,
+                        touched = false,
+                        ref = S('#' + S(this).attr('retype')),
+                        setIsOk = function(e){ return e.JSailorPrecheck.retype = S(e).value() === ref.value(); };
+                        check = function(){
 
-                        return false;
-                    });
+                            touched = true;
+
+                            S(this).css('background-color', setIsOk(this) ? '#CDE79B' : '#FFBCBC');
+                        };
+
+                    if(!('JSailorPrecheck' in this))
+                        this.JSailorPrecheck = {};
+
+                    setIsOk(this);
+
+                    S(this).bind('paste', function(){ return false; }).change(check);
+                    ref.change(function(){ if(touched) check.call(e); });
                 }
+
+                /*each: function(){
+
+                    var e = this;
+
+                    if(!('JSailorPrecheck' in e))
+                        e.JSailorPrecheck = {};
+
+                    e.JSailorPrecheck.retype = function(){
+
+                        return S(e).value() === S('#' + S(e).attr('retype')).value();
+                    };
+                }*/
             },
 
             email: {
@@ -1237,18 +1283,152 @@
                 regexp: 'input[type=email]',
                 each: function(){
 
-                    //this.type === 'text' si non supporte
+                    // this.type === 'text' if not supported
 
-                    S(this).attr('placeholder', 'mail@host.com').blur(function(){
+                    var setIsOk = function(e){ return e.JSailorPrecheck.email = Rex.remail.test(S(e).value()); };
 
-                        var value = S(this).value();
+                    if(!('JSailorPrecheck' in this))
+                        this.JSailorPrecheck = {};
 
-                        if(value)
-                            S(this).css('background-color', Rex.remail.test(value) ? '#CDE79B' : '#FFBCBC');
+                    setIsOk(this);
 
-                    }).focus(function(){
+                    S(this).attr('placeholder', 'you@example.com').change(function(){
 
-                        S(this).css('background-color', '');
+                        S(this).css('background-color', setIsOk(this) ? '#CDE79B' : '#FFBCBC');
+                    });
+                }
+            },
+
+            maxlength: {
+
+                on: false,
+                regexp: 'input[maxlength]',
+                each: function(){
+
+                    var maxlength = parseInt(S(this).attr('maxlength')),
+                        setIsOk = function(e){ return e.JSailorPrecheck.maxlength = S(e).value().length <= maxlength; };
+
+                    if(!('JSailorPrecheck' in this))
+                        this.JSailorPrecheck = {};
+
+                    setIsOk(this);
+
+                    S(this).change(function(){
+
+                        S(this).css('background-color', setIsOk(this) ? '#CDE79B' : '#FFBCBC');
+                    });
+                }
+            },
+
+            minlength: {
+
+                on: false,
+                regexp: 'input[minlength]',
+                each: function(){
+
+                    var minlength = parseInt(S(this).attr('minlength')),
+                        setIsOk = function(e){ return e.JSailorPrecheck.minlength = S(e).value().length >= minlength; };
+
+                    if(!('JSailorPrecheck' in this))
+                        this.JSailorPrecheck = {};
+
+                    setIsOk(this);
+
+                    S(this).change(function(){
+
+                        S(this).css('background-color', setIsOk(this) ? '#CDE79B' : '#FFBCBC');
+                    });
+                }
+            },
+
+            /*Fi({
+
+                // Confirmation input useful for password first recording
+                // - copy/paste locked
+                // - value equal to value of reference
+                retype: {
+
+                    // <input type="..." retype="refelementid"/>
+                    regexp: 'input[retype]',
+                    getconfig: function(e){
+
+                        return { ref: S(e).attr('retype') };
+                    },
+                    watchout: function(config){
+
+                        var e = this,
+                            ref = S('#' + config.ref),
+                            check = function(){
+
+                                this.JSailorPrecheck = S(this).value() === ref.value();
+
+                                S(this).css('background-color', this.JSailorPrecheck ? '#CDE79B' : '#FFBCBC');
+
+                            };
+
+                        S(e).bind('paste', function(){ return false; }).change(check);
+                        ref.change(function(){ check.call(e); });
+                    }
+                },
+
+                email: {
+
+                    regexp: 'input[type=email]',
+                    getconfig: function(e){},
+                    watchout: function(){
+
+                        // this.type === 'text' if not supported
+
+                        S(this).attr('placeholder', 'you@example.com').change(function(){
+
+                            this.JSailorPrecheck = Rex.remail.test(S(this).value());
+
+                            S(this).css('background-color', this.JSailorPrecheck ? '#CDE79B' : '#FFBCBC');
+                        });
+                    }
+                }
+
+            }, function(fn, data){
+
+                S.Fn[fn] = function(config){
+
+                    return this.each(function(){
+
+                        this.JSailorPrecheck = false;
+                        data.watchout.call(this, config);
+                    });
+                };
+
+                S.Enhancer[fn] = {
+
+                    on: true,
+                    regexp: data.regexp,
+                    each: function(){
+
+                        S(this)[fn](data.getconfig(e));
+                    }
+                };
+            });*/
+
+            submit: {
+
+                on: false,
+                regexp: '[submit-precheck]',
+                each: function(){
+
+                    S(this).click(function(){
+
+                        var precheck = true;
+
+                        S('#' + S(this).attr('submit-precheck')).descendants('[prechecked]').each(function(){
+
+                            Fi(this.JSailorPrecheck, function(){ return precheck = this; });
+
+                            return precheck;
+                        });
+
+                        if(!precheck)
+                            return false;
                     });
                 }
             },
@@ -1338,7 +1518,7 @@
 
             js: function(str){
 
-                //attacher eval a window sinon contexte d'execution errone
+                // Eval is called on the current context if not specified
                 return window.eval(str);
             },
 
@@ -1356,6 +1536,7 @@
 
                     var doc = new window.ActiveXObject('Microsoft.XMLDOM');
 
+                    doc.async = false;
                     doc.loadXML(str);
 
                     return doc;
@@ -1803,6 +1984,20 @@
         },
 
         Dom: {
+
+            // (null, undefined)
+            // (e)
+            // (doc)
+            // (frag)
+            // (e, doc)
+            // ()
+            isAttached: function(e, doc){
+
+                if(!e) return false;
+                if(!doc) doc = e.nodeType === 9 ? e : e.ownerDocument;
+
+                return e === doc ? true : this.isAttached(e.parentNode, doc);
+            },
 
             parentWindow: (function(){
 
@@ -2526,15 +2721,15 @@
                 else if(callback)
                     setup.success = callback;
 
-                S.Ajax.request( S.Object.extend(setting, setup) );
+                return S.Ajax.request( S.Object.extend(setting, setup) );
             };
-            
+
             var uurl = function(url){
-                    
+
                 var nocache = 0;
-                
-                while(new RegExp('(\\?|&)[' + nocache + ']=').test(url))
-                    nocache++; 
+
+                while(new RegExp('[?&]\\[' + nocache + '\\]=').test(url))
+                    nocache++;
 
                 return url += ( /\?/.test(url) ? '&' : '?') + '[' + nocache + ']=' + S.Time.now();
             };
@@ -2546,7 +2741,13 @@
                     //taille max du nested cache (default to 1Mio)
                     cacheSize: 1048576,
                     //type mime des donnees a cacher
-                    cachedMimeType: '(text|application)/(plain|html|css|javascript|json|xml)'
+                    cachedMimeType: '(text|application)/(plain|html|css|javascript|json|xml)',
+                    accept: {
+
+                        'html?': 'text/html',
+                        'css': 'text/css',
+
+                    }
                 },
 
                 //ActiveXObject est en tete car IE connais aussi XMLHttpRequest
@@ -2621,12 +2822,13 @@
                         //extraction des logs de l'url, ne pas reecrire les logs eventuellement existant
                         //les logs de params prevalent sur ceux de l'url
                         if(!params.user)
-                            params.user = logextract[2];
+                            params.user = decodeURIComponent(logextract[logextract[2] ? 2 : 3]);
 
-                        if(!params.password)
-                            params.password = logextract[3];
+                        // Password is there too
+                        if(logextract[2] && !params.password)
+                            params.password = decodeURIComponent(logextract[3]);
 
-                        //effacement des logs de l'url
+                        // Clean up url
                         params.url = params.url.replace(Rex.rurlog, '$1://');
                     }
 
@@ -2657,8 +2859,6 @@
 
                     params.success = function(res){
 
-                        //console.log(params.url + ' : ' + this.getResponseHeader('Content-Type') + ' => ' + new RegExp(params.cachedMimeType).test(this.getResponseHeader('Content-Type')));
-
                         var response = params.response === 'js' ? S.Parser.js(res) :
                                        params.response === 'json' ? S.Parser.json(res) :
                                        //responseText est en default au cas ou l'extension serait inconnue
@@ -2670,6 +2870,7 @@
 
                         if(params.jscontext){
 
+                            // Possible since the potential innerHTML in the success callback is a synchronous operation
                             var scripts = S(params.jscontext).descendants('script'),
                                 nbdone = 0,
                                 jstate = function(){
@@ -2747,7 +2948,7 @@
                                     size: responseSize,
                                     //nb d'acces a la ressource en cache
                                     access: 0,
-                                    lastModified: this.getResponseHeader('Last-Modified') || S.Time.epoch(),
+                                    lastModified: this.getResponseHeader('Last-Modified'),
                                     etag: this.getResponseHeader('ETag'),
                                     content: res
                                 };
@@ -2795,7 +2996,7 @@
                             status: statusc,
                             responseText: responseTextc
                         };
-                        
+
                         //on n'est pas sur d'avoir affaire a du XML
                         try{ xhr.responseXML = S.Parser.xml(responseTextc); }
                         catch(e){}
@@ -2829,18 +3030,33 @@
                     /*********************
                      CONSULTATION DU CACHE
                      *********************/
+                    /*if(params.cache === 'auto'){
+
+                        // Tient compte du max-age stipulé par les réponses antérieures
+                        if(cacheresources[params.url]){
+
+                            if('maxAge' in cacheresources[params.url])
+                                if(S.Time.now() - cacheresources[params.url].date <= cacheresources[params.url].maxAge)
+                                    cache
+                        }
+                        else
+                            id à params.cache = 'valid';
+                    }*/
+
                     // La reponse contient la derniere version de la ressource
                     if(params.cache === 'valid'){
-                    	
+
                     	if(cacheresources[params.url]){
-                        	
+
                         	// max-age=0: a priori le cache doit etre considere comme perime
-                            // must-revalidate: on precise qu'il faut revalider car certains caches renvoient des reponses meme perimees
-                            // public: la reponse pourra etre cachee partout
-                            params.headers.cacheControl = 'max-age=0, must-revalidate, public';
-                            
-                            // lastModified existe forcement car mis par defaut au jeudi 1er janvier 70
-                            params.headers.ifModifiedSince = cacheresources[params.url].lastModified;
+                            // must-revalidate: precise que les caches expires doivent etre revalides avant d'etre renvoyes (max-stale < must-revalidate)
+                            // public: la reponse pourra etre cachee sur tout le chemin jusqu'au client
+                            // no-cache: revalidation avant tout
+                            //params.headers.cacheControl = 'max-age=0, must-revalidate, public';
+                            params.headers.cacheControl = 'no-cache, public';
+
+                            if(cacheresources[params.url].lastModified)
+                                params.headers.ifModifiedSince = cacheresources[params.url].lastModified;
 
                             if(cacheresources[params.url].etag)
                                 params.headers.ifNoneMatch = cacheresources[params.url].etag;
@@ -2850,7 +3066,7 @@
                                 // ne pas faire le callback normal tout de suite
                                 // si 304 car la requete n'est pas finie
                                 if(this.status === 304){
-                                	
+
                                 	cacheresources[params.url].access++;
                                     finish(304, cacheresources[params.url].content);
                                 }
@@ -2858,31 +3074,31 @@
                                     buffer4bis.call(this, res);
                             };
                         }
-                        
+
                         // Si on ne force pas la main, IE va aller chercher une ressource perimee dans son cache pour la premiere requete
                         // params.url doit rester vierge car sinon pas moyen de faire une entree reutilisable dans le nested cache car unique
                         else
                             reqURL = uurl(params.url);
                     }
-                    // La reponse vient ne peut venir que du serveur
+                    // La reponse ne peut venir que du serveur
                     else if(params.cache === 'never'){
 
                         params.headers.cacheControl = 'no-cache, no-store';
-                        
+
                         reqURL = uurl(params.url);
                     }
                     // isset/only
                     else{
-                        
+
                         if(cacheresources[params.url]){
-                            
+
                             cacheresources[params.url].access++;
                             finish(200, cacheresources[params.url].content);
                         }
                         else if(params.cache === 'isset')
                             params.headers.cacheControl = 'max-age=' + S.Time.now() + ', public';
-                        
-                        // On n'essaye meme pas de traiter avce le vrai cache client car seul Safari gere le header 'only-if-cached'
+
+                        // On n'essaye meme pas de traiter avec le vrai cache client car seul Safari gere le header 'only-if-cached'
                         else if(params.cache === 'only')
                             finish(200/*, undefined*/);
                     }
@@ -2897,7 +3113,7 @@
                          ********************************/
                         S.Object.extend(params.headers, {
 
-                            contentType: params.content + ';charset=' + params.charset,
+                            contentType: params.content + '; charset=' + params.charset,
                             xPoweredBy: 'JSailor/' + S.About.version,
                             xCacheMode: params.cache
                         });
@@ -2909,7 +3125,7 @@
 
                             Fi(params.data, function(nom, valeur){
 
-                                concat += (concat ? '&' : '') + nom + '=' + valeur;
+                                concat += (concat ? '&' : '') + encodeURIComponent(nom) + '=' + encodeURIComponent(valeur);
                             });
 
                             params.data = concat;
@@ -2918,7 +3134,7 @@
                         //mode asynchrone, le binding est a effectuer avant .open car IE verrouille onreadystatechange des l'appel a .open
                         if(params.async)
                             xhr.onreadystatechange = function(){
-								
+
 								//sous IE, this pointe sur window et par sur xhr
 								if(params[xhr.readyState])
                                     params[xhr.readyState].call(xhr, xhr.responseText);
@@ -2931,7 +3147,7 @@
                         try{
 
                             xhr.open(params.method, reqURL || params.url, params.async, params.user, params.password);
-							
+
                             Fi(params.headers, function(header, value){
 
                                 xhr.setRequestHeader(header.charAt(0).toUpperCase() + header.substring(1).replace(/([A-Z])/g, '-$1'), value);
@@ -2952,7 +3168,7 @@
 
                 get: function(url, setup, callback){
 
-                    fusionParam({
+                    return fusionParam({
                         method: 'GET',
                         url: url,
                         data: null
@@ -2961,7 +3177,7 @@
 
                 post: function(url, data, setup, callback){
 
-                    fusionParam({
+                    return fusionParam({
                         method: 'POST',
                         url: url,
                         data: data
@@ -3027,8 +3243,22 @@
 
             not: function(expr){
 
+                var for_filter = false;
+
+                if(S.Test.isString(expr)){
+
+                    expr = Eval.clean(expr);
+
+                    var split = Eval.split(expr);
+
+                    for_filter = split[0] < 0 && split[1] < 0 && split[2] < 0;
+                }
+
+                else if(S.Test.isFunction(expr))
+                    for_filter = true;
+
                 //on ne peut nier simplement que les expressions simples ou les predicats
-                return S.Test.isFunction(expr) || ( S.Test.isString(expr) && Rex.rsimple.test(expr) ) ?
+                return for_filter ?
                     Eval.filter(expr, this, false) :
                     S(S.Array.unsetValues(toJSailor(expr).$, this.$));
             },
@@ -3062,37 +3292,41 @@
 
             descendants: function(expr){
 
-                // No parameter or a selector
-                if( !expr || S.Test.isString(expr) ){
+                if(!expr)
+                    expr = '*';
 
-                    expr = expr ? Eval.clean(expr) : '*';
-                    
+                if( S.Test.isString(expr) ){
+
+                    expr = Eval.clean(expr);
+
                     // If a speed up is available, try to use it
                     if(Support.querySelector){
-                    
+
                         try{
-                            
+
                             var res = S();
-                            
+
                             this.each(function(){
 
                                 res = res.or(this.querySelectorAll(expr));
                             });
-                            
+
                             return res;
                         }
                         // If querySelectorAll does not support the selector let's continue as usual
                         catch(e){}
                     }
 
+                    var split = Eval.split(expr);
+
                     //.descendants('#...')
-                    if( Rex.rsimple.test(expr) ){
+                    if(split[0] < 0 && split[1] < 0 && split[2] < 0){
 
                         var res = S(),
                             //early binding
                             fchar = expr.charAt(0),
                             reste = expr.substring(1),
-                            isfilter = new RegExp('[' + Rex.srfilter + ']').test(expr);
+                            isfilter = new RegExp('^[' + Rex.srfilter + ']').test(expr);
 
                         this.each(function(){
 
@@ -3105,17 +3339,13 @@
                         return res;
                     }
 
-                    else{
-
-                        var indexes = Eval.split(expr);
-
+                    else
                                //.descendants('...|...')
-                        return indexes[0] + 1 ? this.descendants( expr.substring(0, indexes[0]) )[ Short[expr.charAt(indexes[0])] ]( this.descendants(expr.substring(indexes[0] + 1)) ) :
+                        return split[0] + 1 ? this.descendants( expr.substring(0, split[0]) )[ Short[expr.charAt(split[0])] ]( this.descendants(expr.substring(split[0] + 1)) ) :
                                //.descendants('...~...')
-                               indexes[1] + 1 ? this.descendants( expr.substring(0, indexes[1]) )[ CSS3.descendants[expr.charAt(indexes[1])] ]( expr.substring(indexes[1] + 1) ) :
+                               split[1] + 1 ? this.descendants( expr.substring(0, split[1]) )[ CSS3.descendants[expr.charAt(split[1])] ]( expr.substring(split[1] + 1) ) :
                                //.descendants('...#...')
-                               this.descendants( expr.substring(0, indexes[2]) ).and( expr.substring(indexes[2]) );
-                    }
+                               this.descendants( expr.substring(0, split[2]) ).and( expr.substring(split[2]) );
                 }
 
                 //predicat
@@ -3189,6 +3419,19 @@
                 });
 
                 return newelt;
+            },
+
+            // TODO finish it and make it IE compatible
+            text: function(value) {
+
+                if(value !== undefined)
+                    return this.each(function(){
+
+                        this.appendChild( document.createTextNode(value) );
+                    });
+
+                else if(this.length)
+                    return this.$[0].textContent;
             },
 
             prop: function(name, value){
@@ -3550,7 +3793,7 @@
 
                             Fx.callback(this.JSailorElementId, prop, true);
                         }
-                        
+
                         stock[Fx.id].length++;
 
                         var xtrem = Fx.evalFor(this, prop, infos, true);
@@ -3849,13 +4092,7 @@
                 return this.html('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi purus felis, bibendum et ultricies convallis, accumsan sed tortor. Vivamus ut ante nisl, ut posuere sapien. Pellentesque mollis tristique pellentesque. Sed ac justo at dui auctor cursus a eu est. Sed lorem enim, dignissim vitae ornare et, tincidunt et quam. Nullam convallis, purus sed rhoncus rhoncus, augue dolor rutrum ligula, vel sagittis eros augue in purus. Aenean sapien nulla, dignissim ac pharetra a, ornare ac nunc. Ut blandit vulputate nisl non placerat. Nam facilisis tempus tortor eget tristique. Vivamus nunc elit, tincidunt ultrices mattis ac, pellentesque luctus tortor. Ut nec diam at mauris tincidunt ultrices luctus eu arcu. In vitae tellus quis purus convallis pellentesque a ut tellus. Cras pretium adipiscing cursus. Etiam molestie dapibus eros non hendrerit. Vestibulum sagittis, arcu ut interdum lacinia, ipsum nulla auctor nisl, nec tristique turpis enim quis augue. Integer luctus tincidunt magna non elementum. Proin aliquet lacinia ipsum in lobortis. Proin porttitor vestibulum sem, vitae vehicula felis pretium non. Aenean est nibh, scelerisque sed pellentesque a, fringilla quis neque. Maecenas metus metus, semper scelerisque varius ac, cursus non urna. Nulla eget dui sem. Aenean placerat, purus quis condimentum euismod, leo nisi dapibus urna, quis commodo lacus sapien sit amet dui. Mauris facilisis nibh et erat feugiat eu auctor nisl tincidunt. Donec purus purus, interdum sit amet ornare a, commodo a enim. Aenean non nulla tortor. Integer placerat commodo mi eu tempor. Curabitur a velit mi. Proin porta diam ut augue vestibulum pulvinar. Praesent dapibus turpis vel erat mattis id iaculis leo rhoncus. Fusce posuere varius pellentesque. Nunc dignissim consequat justo a bibendum. Maecenas commodo, sapien sit amet congue bibendum, erat quam tempus nibh, tincidunt pulvinar lorem nibh quis purus. Nulla facilisi. Nullam ut molestie arcu. Mauris non elit justo. Fusce ornare facilisis quam id consectetur. Duis bibendum ultrices sem ornare luctus. Nulla eu erat at nunc tristique imperdiet. Vestibulum sem nibh, varius in dictum id, malesuada ut sem. Donec sit amet risus purus, in dignissim justo. Nulla viverra, nisl sit amet aliquam blandit, leo lectus adipiscing est, vel euismod purus nunc a nisi. Vestibulum vitae velit id turpis bibendum congue. Vestibulum aliquet, mi quis facilisis tincidunt, nunc libero tincidunt tellus, vel fringilla mauris mauris vitae metus. Nullam ipsum elit, ultrices et vestibulum id, dignissim sed orci. Pellentesque lobortis tempus urna, eu luctus odio ornare nec. Curabitur erat turpis, vestibulum eu sagittis quis, dictum eget tortor. Nullam auctor enim quis arcu euismod sit amet tempor felis viverra. Integer sit amet tortor in justo iaculis egestas at in mi. Vivamus ante felis, mollis a auctor ac, viverra quis dui. Vivamus a leo a sapien gravida fringilla. Fusce dignissim ligula molestie ligula elementum a tristique quam venenatis. Duis neque diam, cursus id hendrerit id, elementum quis tellus. Phasellus adipiscing, urna non egestas ultrices, odio nisl auctor ipsum, vitae vulputate justo tellus eu eros. Nulla id nisi turpis. Suspendisse a erat ipsum, vitae accumsan tellus. Nullam ultricies libero sed sapien iaculis vitae volutpat massa tempor. Nam eget augue augue. Aenean lacinia, purus id gravida ultrices, sem lorem lobortis neque, vestibulum scelerisque quam massa eu elit. In hac habitasse platea dictumst. Duis dolor urna, varius hendrerit luctus eu, viverra eu nisl. Donec mollis tortor vel justo tristique faucibus. In purus enim, dictum vel ultrices in, aliquet sed enim. Quisque tortor nulla, vehicula et dictum dictum, dictum nec lacus. Phasellus eleifend nulla ac lacus accumsan consequat.');
             }
         };
-    })()
-
-    //buggait avec ':nth-child(2n+1)' et ':not(:test)'
-    //rajouter regle si caractere special est entre parentheses
-
-    //matche les expressions de base du selecteur( #id, .class, @name, [attr], :filter, :filter-test() )
-    Rex.rsimple = new RegExp('^(?:[' + Rex.srfilter + ']?[^' + Rex.srshort + Rex.srcss3 + Rex.srfilter + ']+|\\[[^\\[\\]]+\\]|:[a-z-]+\\(.+\\))$');
+    })();
 
     //extension de Filter
     Fl('radio reset checkbox file password submit image'.split(' '), function(i, filtre){
@@ -3944,7 +4181,7 @@
             return elt.offsetParent ? elt[offset] + arguments.callee(elt.offsetParent) : 0;
         };
     });
-    
+
     //les extensions qui suivent sont toutes sur S.Fn
     //methodes Array-like
     Fl('pop shift reverse'.split(' '), function(i, fn){
@@ -3994,13 +4231,13 @@
             return this;
         };
     });
-    
+
     S.Fn.once = function(types, fn){
-        
+
         return this.bind(types, function(event){
-            
+
             S(this).unbind(types, arguments.callee);
-            
+
             fn.call(this, event);
         });
     };

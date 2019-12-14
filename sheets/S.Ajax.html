@@ -1,3 +1,16 @@
 <h3><span class="keyword">Object</span> S.Ajax</h3>
 
-<p>Sous objet de la librairie contenant les fonctions relatives aux requêtes HTTP via JavaScript, plus communément appelées requêtes <span class="string">AJAX</span>(<span class="string">A</span>synchronous <span class="string">J</span>avaScript <span class="string">A</span>nd <span class="string">X</span>ML).</p>
+<p>Sub object of the framework containing all the functions relative to HTTP requests through JavaScript aka <span class="string">AJAX</span>(<span class="string">A</span>synchronous <span class="string">J</span>avaScript <span class="string">A</span>nd <span class="string">X</span>ML).</p>
+
+<h4>Overview</h4>
+
+<p>Methods :<ul>
+    <li>xhr() : returns the proper request object according to the user's browser, useful when you want to manually handle requests.</li>
+    <li>request() : performs a complete request with all provided parameters.</li>
+    <li>get() : shortcut for request() with method GET.</li>
+    <li>post() : shortcut for request() with method POST.</li>
+</ul></p>
+
+<p>Properties :<ul>
+    <li>settings : global configuration shared between all requests.</li>
+</ul></p>

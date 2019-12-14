@@ -1,113 +1,85 @@
-<h3>Qu'est ce que JSailor?</h3>
+<h3>What is JSailor?</h3>
 
-<p>JSailor est une biblothèque JavaScript qui vous permet de manipuler les éléments d'un document HTML avec une simplicité étonnante et une syntaxe plus claire qu'avec le code natif. La biblothèque possède également un certain nombre de fonctions prédéfinies assez utiles. Le rédaction du code a été faite dans un soucis de <span class="string">portabilité</span> sur les différents navigateurs. Elle comporte un module assez puissant de gestion des requêtes <span class="string">AJAX</span>(cf S.Ajax) qui vous facilitera la vie et permet également de générer des <span class="string">animations de style</span>(cf S.Fn.tune) dans vos pages alors profitez en!</p>
-
-<hr/>
-
-<h3>A qui s'adresse JSailor?</h3>
-
-<p>JSailor est destinée à tous ceux qui veulent rajouter du dynamisme et des animations à leurs pages web grâce à JavaScript sans passer des nuits entières à coder. Les développeurs souhaitant rendre leur code plus compréhensible seront aussi ravis d'utiliser la syntaxe simple et intuitive de la librairie. Vous devez néanmoins avoir des connaissances de base en XHTML, CSS et JS.</p>
+<p>JSailor is a JavaScript framework that enables you to easily manipulate elements in a HTML document and write scripts in a more concise way. The framework contains a lot of useful methods to help you setting your web application without spending hours on tricky things. The framework is meant to be cross-browser and therefore you don't have to worry about compatibility when writing code with it. One of the great assets of the framework is its AJAX module (cf <code><a href="javascript:display('S.Ajax');">S.Ajax</a></code>) especially designed for web applications that relies a lot on AJAX loads.</p>
 
 <hr/>
 
+<h3>What is the difference between JSailor and jQuery?</h3>
 
-<h3>Comment utiliser JSailor?</h3>
-
-<p>Pour pouvoir utiliser la syntaxe JSailor dans votre code JavaScript il vous suffit de télécharger le fichier source de la librairie disponible à l'adresse <a href="http://omega.webou.net/jsailor/jsailor-1.1.5.min.js">http://omega.webou.net/jsailor/jsailor-1.1.5.min.js</a>. Une fois le fichier téléchargé, placez le où bon vous semble dans l'arborescence de vos dossiers et n'oubliez pas d'inclure le fichier entre les balises head de votre fichier HTML et de placer votre code, écrit en utilisant la syntaxe JSailor, entre des nouvelles balises de script de cette manière:<br/>
-
-<pre class="script"><span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribut">src</span>=<span class="string">&quot;jsailor-<span class="current_version"></span>.min.js&quot;</span>&gt;&lt;/script&gt;</span>
-    <span class="tag">&lt;script <span class="attribut">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span>
-
-        <span class="comment">//Votre code JavaScript utilisant la librairie</span>
-
-    <span class="tag">&lt;/script&gt;</span>
-<span class="tag">&lt;/head&gt;</span></pre></p>
-
-<p>La librairie se présente sous la forme d'une fonction/objet contenue dans la variable S, chacune de ces structures sert différemment:
-    <ul>
-        <li><span class="hilite">objet</span>: contient des sous objets dont les noms servent d'intercalaires(<pre>Array</pre>, <pre>String</pre>, <pre>Test</pre> etc… voir arborescence de gauche) dans lesquels sont contenues des fonctions toutes prêtes comme <pre>stripSlashes()</pre>. Pour utiliser par exemple cette dernière fonction qui enlève les antislashes d'échapemment d'une chaine de caractères il vous suffit de taper:<br/>
-
-<pre class="script"><span class="keyword">var</span> chaine_sans_slashes = S.String.stripSlashes(chaine);
-<span class="comment">//Où String est le sous objet de la librairie contenant toutes les fonctions relatives aux chaines de caractères</span></pre>
-        </li>
-
-        <li><span class="hilite">fonction</span>: <pre>S()</pre> crée une nouvelle instance de l'objet <pre>S.JSailor</pre>(idem <pre><span class="keyword">new</span> S.JSailor()</pre>) qui est l'outil de sélection des éléments HTML(cf <a href="javascript:display('S.JSailor');">sélection d'éléments</a>).<br/>
-
-<pre class="script">S(<span class="string">'div.foo'</span>).click(<span class="keyword">function</span>(){
-
-    S(<span class="keyword">this</span>).tune({
-
-        <span class="string">'background-color'</span>: <span class="string">'green'</span>,
-        <span class="string">'font-size'</span>: <span class="string">'3em'</span>
-
-    }, <span class="number">2000</span>);
-});
-
-<span class="comment">//Cliquez sur le bloc(CLASS = foo) ci-dessous pour voir ce que fait ce code</span></pre>
-
-            <div class="foo" style="background-color:red;">Cliquez sur moi!</div>
-            <script>S('div.foo').click(function(){ S(this).tune({'background-color':'green','font-size':'3em'}, 2000, 'bounce-out'); });</script>
-        </li>
-    </ul>
-</p>
-
-<p>Pour accéder aux informations détaillées sur chacune des méthodes, cliquez sur les éléments du menu de gauche et déroulez l'arborescence jusqu'à la méthode souhaitée. Les méthodes appliquables aux sélections d'éléments via JSailor sont contenues dans le sous objet <a href="javascript:display('S.Fn');">S.Fn</a></p>
+<p>At a first glance, both are basically the same except that JSailor is maintained only by me. Indeed JSailor is actually a personal project whose aim is to try implementing the very good idea of jQuery in a slightly different manner.</p>
 
 <hr/>
 
-<h3>Les versions disponibles</h3>
+<h3>How to use?</h3>
 
-<p>La version la plus courante est la <span class="current_version"></span>. Si vous possèdez une version plus ancienne je vous conseille d'utiliser la plus récente car les autres versions sont assez instables.</p>
+<p>To get it working, you just need to download the framework available here <code><a href="http://omega.webou.net/jsailor/jsailor-1.1.7.min.js">http://omega.webou.net/jsailor/jsailor-1.1.7.min.js</a></code> and then call it in the head of your webpages before your own scripts like in the example below:</p>
+
+<div class="code">
+
+    <span class="t">&lt;head&gt;</span><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="t">&lt;script <span class="a">type</span>=<span class="s">&quot;text/javascript&quot;</span> <span class="a">src</span>=<span class="s">&quot;jsailor-<span class="current_version"></span>.min.js&quot;</span>&gt;&lt;/script&gt;</span><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="t">&lt;script <span class="a">type</span>=<span class="s">&quot;text/javascript&quot;</span>&gt;</span><br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="c">// Put your magic here!</span><br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="t">&lt;/script&gt;</span><br/>
+    <span class="t">&lt;/head&gt;</span>
+
+</div>
+
+<p>The framework is wrapped in a simple function on which are attached modules (cf tree on the left). Modules contain functions that you can use at your convenience depending on what you want to do. A simple example:</p>
+
+<div class="code">
+
+    <span class="k">var</span> myString = S.String.stripSlashes(<span class="s">'I\\'m a string'</span>);<br/>
+    <span class="c">// myString = I'm a string</span>
+
+</div>
+
+<p>Now you know how to find the functions, you want to handle HTML elements. There is no easier way to do it, just pass the selector corresponding to the wanted element to the framework function and then you can call the framework's methods on the collection retrieved by the selector like this:</p>
+
+<div class="code">
+
+    S(<span class="s">'div.foo'</span>).click(<span class="k">function</span>(){<br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;S(<span class="k">this</span>).tune({<br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">'background-color'</span>: <span class="s">'green'</span>,<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">'font-size'</span>: <span class="s">'3em'</span><br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;}, <span class="n">1500</span>, <span class="s">'bounce-out'</span>);<br/>
+    });<br/>
+    <br/>
+    <span class="c">// This short code add an on click listener to all divs with the class foo. When clicked the divs will be animated.</span>
+
+</div>
+
+<p class="foo" style="background-color:red;padding:10px;">Click Me!</p>
+<script>S('p.foo').click(function(){ S(this).tune({'background-color':'green','font-size':'3em'}, 1500, 'bounce-out'); });</script>
+
+<p>Notice that passing a selector to <code>S()</code> is basically the same as passing it to <code>S.JSailor()</code>. For more details on how to select elements from the document see <code><a href="javascript:display('S.JSailor');">S.JSailor</a></code>, for information about the methods you can call on a set of elements see <code><a href="javascript:display('S.Fn');">S.Fn</a></code>.</p>
 
 <hr/>
 
-<h3>Nomenclature du manuel</h3>
+<h3>Latest stable release</h3>
+
+<p>The current version is <span class="current_version"></span>. It is strongly recommended to always get the latest version.</p>
+
+<hr/>
+
+<h3>Documentation help</h3>
 
 <p>
-    <ul>
-        <li><span class="keyword">Type0</span> fn(<span class="keyword">Type1</span> argument1, <span class="keyword">Type2</span> argument2) signifie: la fonction fn prend deux paramètres, l'un de type <span class="keyword">Type1</span> et l'autre de type <span class="keyword">Type2</span> et retourne une valeur de type <span class="keyword">Type0</span>.</li>
-        <br/>
-        
-        <li>Un type écrit sous la forme <span class="keyword">TypeA</span>+<span class="keyword">TypeB</span> signifie: soit du type <span class="keyword">TypeA</span> soit du type <span class="keyword">TypeB</span>.</li>
-        <br/>
-        
-        <li>Un argument écrit entre [] signifie que cet argument est facultatif.</li>
-        <br/>
-        
-        <li>Vous trouverez dans la doc différents types, ci-dessous une liste exhaustive avec leurs significations respectives:
-            <ul>
-                <li><span class="keyword">Void</span>: undefined(n'existe pas)</li>
-                <li><span class="keyword">Variant</span>: n'importe quel type</li>
-                <li><span class="keyword">String</span>: chaîne de caractères</li>
-                <li><span class="keyword">Char</span>: chaine de caractères ne comportant qu'un seul caractère</li>
-                <li><span class="keyword">JSailor</span>: objet JSailor( type retourné par les expressions S(…) ).</li>
-                <li><span class="keyword">Function</span>: une fonction</li>
-                <li><span class="keyword">Number</span>: une valeur numérique(nombre, chiffre)</li>
-                <li><span class="keyword">Element</span>: noeud HTML de type balise</li>
-                <li><span class="keyword">Document</span>: noeud <pre class="keyword">document</pre></li>
-                <li><span class="keyword">Collection</span>: collection d'éléments HTML</li>
-                <li><span class="keyword">Fragment</span>: fragment HTML(cf documentCreateFragment() )</li>
-                <li><span class="keyword">Object</span>: objet javascript, soit littéral(déclaré avec {} ou <span class="keyword">new Object</span>()), soit instance d'une classe)</li>
-                <li><span class="keyword">Array</span>: tableau javascript(déclaré avec [] ou <span class="keyword">new Array</span>())</li>
-                <li><span class="keyword">Event</span>: type <span class="keyword">Object</span> particulier(propriétés bien définies cf <a href="javascript:display('Event_Object');">objet event</a>)</li>
-                <li><span class="keyword">Multi</span>: rassemble tous les types acceptables pour la création d'une instance JSailor soient:
-                    <ul>
-                        <li>Array(ne contenant que des éléments HTML)</li>
-                        <li>String(sous forme d'une expression de sélection d'éléments)</li>
-                        <li>Function</li>
-                        <li>Element</li>
-                        <li>Document</li>
-                        <li>Collection</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <span class="k">Type0</span> anyFunction(<span class="k">Type1</span> arg1, <span class="k">Type2</span> arg2) : the function takes 2 args, first of <span class="k">Type1</span>, second of type <span class="k">Type2</span> and returns a <span class="k">Type0</span><br/>
+    <span class="k">TypeA</span>+<span class="k">TypeB</span> : <span class="k">TypeA</span> or <span class="k">TypeB</span><br/>
+    [<span class="k">Type</span> arg] : arg is optionnal<br/>
 </p>
 
-<hr/>
-
-<h3>Discussions et rapports de bugs</h3>
-
-<p>Pour ceux qui veulent apporter leur pierre à l'édifice soit en proposant de nouvelles idées soit en faisant des rapports de bug, n'hésitez pas à nous rejoindre sur le groupe Facebook JSailor Javascript Library. Je serais heureux de récolter vos impressions! Pour les rapports de bug vous fournirez toutes les pièces nécessaires à la recréation du bug(code HTML et JS) et vos idées si vous en avez sur la question ^^ Sur ce éclatez vous!</p>
+<p>        
+    <span class="k">Void</span> : nothing<br/>
+    <span class="k">Variant</span> : anything<br/>
+    <span class="k">Char</span> : a single character <code>String</code><br/>
+    <span class="k">JSailor</span> : set of elements as returned by <code>S()</code><br/>
+    <span class="k">Event</span> : object generated after an event has happened see <a href="javascript:display('Event_Object');">event object</a> for details about available properties<br/>
+    <span class="k">JSailorArg</span> : all types that can be passed as argument to <code>S()</code> see <a href="javascript:display('S.JSailor');">S.JSailor</a> for details
+</p>

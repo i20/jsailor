@@ -1,32 +1,45 @@
-.comment
-{
-	color: green;
+/* comment */
+.c {
+	color: #008E27;
 	font-style: italic;
 }
-.keyword
-{
-	color: #E27A25;
-	font-style: bold;
+
+/* keyword */
+.k {
+	color: #C3681E;
+	font-style: italic;
 }
-.string
-{ color: red; }
-.number
-{ color: #194BA2; }
-.tag
-{ color: #1D37F0; }
-.attribut
-{ color: #91904C; }
-.var
-{ color: #CC2EC2; }
-.php
-{ color: #868686; }
-.script
-{
-	display: block;
-	border: 1px solid black;
-	padding: 15px;
-	margin-bottom: 10px;
-	background-color: #DEE4EA;
+
+/* string */
+.s { color: #C20B17; }
+
+/* number */
+.n {
+    color: #194BA2;
+    font-style: italic;
+}
+
+/* tag */
+.t { color: #194BA2; }
+
+// Don't use it since the < > won't be selectable
+//.t:before { content: "<"; }
+//.t:after { content: ">"; }
+
+/* attribute */
+.a { color: #91904C; }
+
+/* var */
+.v { color: #BA2999; }
+
+.code {
+    color: #61615D;
+    font-family: Monaco;
+    font-size: 11pt;
+	border: 1px solid #8E9090;
+	border-radius: 8px;
+	padding: 20px;
+	background-color: #131A23;
 }
 .sample
 {
@@ -35,6 +48,14 @@
 	margin-bottom: 10px;
 	background-color: #FFFFFF;
 }
+
+code {
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 2px;
+    font-family: Monospace;
+}
+
 .hilite, a
 { color: #E83A1D; }
 .off
@@ -76,12 +97,11 @@
 	border: 1px solid black;
 	padding-left: 15px;
 	padding-right: 15px;
-	background-color: #FFFFFF;
+	background-color: #E6E7E7;
 }
-pre
-{ display: inline; }
-body
-{
-    //background-color: #EC8921;
+body {
+    font-family: Verdana;
     background-image: url("images/pict-06.png");
 }
+
+h3 { color: #194BA2; }
